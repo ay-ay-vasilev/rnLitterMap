@@ -2,7 +2,9 @@ import React from "react";
 import { Dimensions, View } from "react-native";
 import MapView from "react-native-maps";
 
-export default function MapScreen() {
+import RaisedButton from "../components/RaisedButton";
+
+export default function MapScreen({ navigation }) {
   return (
     <View
       style={{
@@ -18,6 +20,19 @@ export default function MapScreen() {
           height: Dimensions.get("window").height,
         }}
       />
+      <View
+        style={{
+          position: "absolute",
+          top: "90%",
+          left: 0,
+          right: 0,
+          justifyContent: "center",
+          alignItems: "center",
+          alignSelf: "flex-end",
+        }}
+      >
+        <RaisedButton navigation={navigation} path="Map" text="Добавить" />
+      </View>
     </View>
   );
 }

@@ -10,6 +10,8 @@ export default function RaisedButton(props) {
   return (
     <LinearGradient
       colors={[colors.PRIMARY_GRADIENT_1, colors.PRIMARY_GRADIENT_2]}
+      start={{ x: 0, y: 1 }}
+      end={{ x: 1, y: 1 }}
       style={styles.buttonLogin}
     >
       <TouchableOpacity
