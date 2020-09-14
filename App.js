@@ -1,6 +1,9 @@
+import "react-native-gesture-handler";
+
 import React from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import Main from "./src/Main";
+import { StyleSheet } from "react-native";
+import Login from "./src/screens/Login";
 
 const theme = {
   ...DefaultTheme,
@@ -16,7 +19,7 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <Main />
+      <Login />
     </PaperProvider>
   );
 }
