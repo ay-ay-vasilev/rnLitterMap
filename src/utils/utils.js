@@ -18,7 +18,7 @@ export function GradientSelected(focused, iconName, colors) {
         >
           <MaterialCommunityIcons
             name={iconName}
-            color={colors.primary}
+            color={colors.PRIMARY_SOLID}
             size={26}
           />
         </View>
@@ -36,7 +36,7 @@ export function GradientSelected(focused, iconName, colors) {
   ) : (
     <MaterialCommunityIcons
       name={iconName}
-      color={colors.secondary}
+      color={colors.TEXT_GREY}
       size={26}
     />
   );

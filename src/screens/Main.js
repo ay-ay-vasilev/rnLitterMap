@@ -9,11 +9,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-community/masked-view";
 // Screens
-import MapScreen from "./screens/MapScreen";
-import CardlistScreen from "./screens/CardlistScreen";
-import AccountScreen from "./screens/AccountScreen";
+import MapScreen from "./MapScreen";
+import CardlistScreen from "./CardlistScreen";
+import AccountScreen from "./AccountScreen";
 
-import { GradientSelected } from "./utils/helper";
+import { GradientSelected } from "../utils/utils";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -26,6 +26,8 @@ function CardlistStackScreen() {
         component={CardlistScreen}
         options={{
           title: "Свалки",
+          headerLeft: null,
+          headerTitleStyle: { alignSelf: "center" },
         }}
       />
     </CardlistStack.Navigator>
@@ -39,7 +41,11 @@ function MapStackScreen() {
       <MapStack.Screen
         name="Map"
         component={MapScreen}
-        options={{ title: "Карта" }}
+        options={{
+          title: "Карта",
+          headerLeft: null,
+          headerTitleStyle: { alignSelf: "center" },
+        }}
       />
     </MapStack.Navigator>
   );
@@ -52,19 +58,23 @@ function AccountStackScreen() {
       <AccountStack.Screen
         name="Account"
         component={AccountScreen}
-        options={{ title: "Профиль" }}
+        options={{
+          title: "Профиль",
+          headerLeft: null,
+          headerTitleStyle: { alignSelf: "center" },
+        }}
       />
     </AccountStack.Navigator>
   );
 }
 
-export default function Main(props) {
+export default function Main() {
   const { colors } = useTheme();
 
   return (
     <Tab.Navigator
       initialRouteName="Dumplist"
-      activeColor={colors.primary}
+      activeColor={colors.PRIMARY_SOLID}
       labelStyle={{ fontSize: 12 }}
       barStyle={{ backgroundColor: "white" }}
     >

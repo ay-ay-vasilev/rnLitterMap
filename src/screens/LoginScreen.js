@@ -1,45 +1,38 @@
 import React from "react";
 import { Image, View, TouchableOpacity, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useTheme } from "react-native-paper";
 
-import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Main from "../Main";
-import styles from "../styles";
+import Main from "./Main";
+import styles from "../styles/styles";
+
+import RaisedButton from "../components/RaisedButton";
 
 const Stack = createStackNavigator();
 
-function LoginScreen({ navigation }) {
+function LoginStackScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
         source={require("../assets/logo-vertical.png")}
         style={styles.loginLogo}
       />
-      <LinearGradient
-        colors={["#00FF75", "#08BD9D"]}
-        style={styles.buttonLogin}
-      >
-        <TouchableOpacity
-          style={styles.buttonLogin}
-          onPress={() => navigation.navigate("Main")}
-        >
-          <Text style={styles.whiteText}>Войти</Text>
-        </TouchableOpacity>
-      </LinearGradient>
+      <RaisedButton navigation={navigation} path="Main" text="Войти" />
     </View>
   );
 }
 
-export default function Login() {
+export default function LoginScreen() {
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="LoginScreen"
+        initialRouteName="LoginStackScreen"
       >
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="LoginStackScreen" component={LoginStackScreen} />
         <Stack.Screen name="Main" component={Main} />
       </Stack.Navigator>
     </NavigationContainer>
