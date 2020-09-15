@@ -1,4 +1,7 @@
+import { Dimensions } from "react-native";
 import { StyleSheet } from "react-native";
+
+import theme from "./theme.style";
 
 export default StyleSheet.create({
   container: {
@@ -7,12 +10,25 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  map: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+  },
   loginLogo: {
     position: "absolute",
     width: 170,
     height: 170,
     left: 115,
     top: "23%",
+  },
+  buttonBottomRaised: {
+    position: "absolute",
+    top: "90%",
+    left: 0,
+    right: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "flex-end",
   },
   buttonGradient: {
     padding: 25,
@@ -33,5 +49,22 @@ export default StyleSheet.create({
   },
   whiteText: {
     color: "white",
+  },
+  cardListTitle1Cleaned: {
+    color: theme.colors.PRIMARY_SOLID,
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  cardListTitle1NotCleaned: {
+    color: theme.colors.SECONDARY_SOLID,
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  cardListTitle2: {
+    color: "black",
+    fontWeight: "bold",
+  },
+  cardListTitle3: {
+    color: "black",
   },
 });

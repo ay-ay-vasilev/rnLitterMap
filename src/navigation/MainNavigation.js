@@ -1,17 +1,13 @@
 import React from "react";
-import { View } from "react-native";
 // Navigation stuff
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 // Icon and fluff stuff
-import { useTheme, IconButton } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-community/masked-view";
+import { useTheme } from "react-native-paper";
 // Screens
-import MapScreen from "./MapScreen";
-import CardlistScreen from "./CardlistScreen";
-import AccountScreen from "./AccountScreen";
+import MapScreen from "../screens/MapScreen";
+import CardlistScreen from "../screens/CardlistScreen";
+import AccountScreen from "../screens/AccountScreen";
 
 import { GradientSelected } from "../utils/utils";
 
@@ -68,7 +64,7 @@ function AccountStackScreen() {
   );
 }
 
-export default function Main() {
+export default function MainNavigation() {
   const { colors } = useTheme();
 
   return (
