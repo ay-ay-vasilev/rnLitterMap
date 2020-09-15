@@ -41,3 +41,19 @@ export function GradientSelected(focused, iconName, colors) {
     />
   );
 }
+
+export function translateSize(value) {
+  switch (value) {
+    case "small":
+      return "Хватит одного пакета";
+      break;
+    case "medium":
+      return "Нужно несколько пакетов";
+      break;
+    case "big":
+      return "Нужен грузовой автомобиль";
+      break;
+    default:
+      return "Неизвестно";
+  }
+}
