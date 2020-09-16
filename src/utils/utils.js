@@ -16,11 +16,7 @@ export function GradientSelected(focused, iconName, colors) {
             alignItems: "center",
           }}
         >
-          <MaterialCommunityIcons
-            name={iconName}
-            color={colors.PRIMARY_SOLID}
-            size={26}
-          />
+          <MaterialCommunityIcons name={iconName} size={26} />
         </View>
       }
     >
