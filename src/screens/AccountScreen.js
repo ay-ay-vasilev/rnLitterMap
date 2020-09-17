@@ -1,8 +1,14 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import { Avatar, Card, Paragraph, FAB, useTheme } from "react-native-paper";
+import { View, ScrollView } from "react-native";
+import { useTheme } from "react-native-paper";
 
 import RaisedButton from "../components/RaisedButton";
+import AccountAvatar from "../components/AccountAvatar";
+import AccountPropertyCard from "../components/AccountPropertyCard";
+
+import styles from "../styles/styles";
+
+import { fakeUser } from "../test/testData";
 
 export default function AccountScreen({ navigation }) {
   const { colors } = useTheme();
@@ -10,85 +16,38 @@ export default function AccountScreen({ navigation }) {
   return (
     <View>
       <ScrollView>
-        <View style={{ alignItems: "center", marginTop: 30, marginBottom: 30 }}>
-          <Avatar.Image
-            size={172}
-            source={require("../assets/no-img-new.png")}
-          />
+        <AccountAvatar colors={colors} />
 
-          <View style={{ position: "absolute", top: "70%", left: "60%" }}>
-            <FAB
-              small
-              color="white"
-              icon="pencil"
-              style={{ backgroundColor: colors.PRIMARY_SOLID }}
-            />
-          </View>
-        </View>
+        <AccountPropertyCard
+          propertyName="Имя"
+          propertyValue={fakeUser.name}
+          colors={colors}
+        />
 
-        <View style={{ margin: 8 }}>
-          <Card>
-            <Card.Content>
-              <Paragraph style={{ lineHeight: 30 }}>
-                <Text style={{ color: colors.PRIMARY_SOLID, fontSize: 17 }}>
-                  Имя{`\n`}
-                </Text>
-                <Text style={{ color: colors.TEXT_DARK, fontSize: 20 }}>
-                  Иванов
-                </Text>
-              </Paragraph>
-            </Card.Content>
-          </Card>
-        </View>
+        <AccountPropertyCard
+          propertyName={fakeUser.dateOfBirth}
+          propertyValue="01.01.2000"
+          colors={colors}
+        />
 
-        <View style={{ margin: 8 }}>
-          <Card>
-            <Card.Content>
-              <Paragraph style={{ lineHeight: 30 }}>
-                <Text style={{ color: colors.PRIMARY_SOLID, fontSize: 17 }}>
-                  Дата рождения{`\n`}
-                </Text>
-                <Text style={{ color: colors.TEXT_DARK, fontSize: 20 }}>
-                  01.01.2000
-                </Text>
-              </Paragraph>
-            </Card.Content>
-          </Card>
-        </View>
-        <View style={{ margin: 8 }}>
-          <Card>
-            <Card.Content>
-              <Paragraph style={{ lineHeight: 30 }}>
-                <Text style={{ color: colors.PRIMARY_SOLID, fontSize: 17 }}>
-                  Статус{`\n`}
-                </Text>
-                <Text style={{ color: colors.TEXT_DARK, fontSize: 20 }}>
-                  Убираю
-                </Text>
-              </Paragraph>
-            </Card.Content>
-          </Card>
-        </View>
-        <View style={{ margin: 8 }}>
-          <Card>
-            <Card.Content>
-              <Paragraph style={{ lineHeight: 30 }}>
-                <Text style={{ color: colors.PRIMARY_SOLID, fontSize: 17 }}>
-                  Имя пользователя{`\n`}
-                </Text>
-                <Text style={{ color: colors.TEXT_DARK, fontSize: 20 }}>
-                  @username
-                </Text>
-              </Paragraph>
-            </Card.Content>
-          </Card>
-        </View>
+        <AccountPropertyCard
+          propertyName={fakeUser.status}
+          propertyValue="Спасаю Землю"
+          colors={colors}
+        />
+
+        <AccountPropertyCard
+          propertyName={fakeUser.username}
+          propertyValue="@username"
+          colors={colors}
+        />
 
         <View style={{ alignItems: "center", marginTop: 20, marginBottom: 20 }}>
           <RaisedButton
             navigation={navigation}
             path="Account"
             text="Сохранить"
+            style={styles.buttonLogin}
           />
         </View>
       </ScrollView>

@@ -12,10 +12,10 @@ export default function RaisedButton(props) {
       colors={[colors.PRIMARY_GRADIENT_1, colors.PRIMARY_GRADIENT_2]}
       start={{ x: 0, y: 1 }}
       end={{ x: 1, y: 1 }}
-      style={styles.buttonLogin}
+      style={props.style}
     >
       <TouchableOpacity
-        style={styles.buttonLogin}
+        style={props.style}
         onPress={() => props.navigation.navigate(props.path)}
       >
         <Text style={styles.whiteText}>{props.text}</Text>

@@ -8,14 +8,17 @@ import RaisedButton from "../components/RaisedButton";
 export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/logo-vertical.png")}
-        style={styles.loginLogo}
-      />
+      <View style={styles.loginLogoWrapper}>
+        <Image
+          source={require("../assets/logo-vertical.png")}
+          style={styles.loginLogo}
+        />
+      </View>
       <RaisedButton
         navigation={navigation}
         path="MainNavigation"
         text="Войти"
+        style={styles.buttonLogin}
       />
     </View>
   );

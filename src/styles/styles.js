@@ -15,11 +15,11 @@ export default StyleSheet.create({
     height: Dimensions.get("window").height,
   },
   loginLogo: {
-    position: "absolute",
     width: 170,
     height: 170,
-    left: 115,
-    top: "23%",
+  },
+  loginLogoWrapper: {
+    alignSelf: "center",
   },
   buttonBottomRaised: {
     position: "absolute",

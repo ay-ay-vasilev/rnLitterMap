@@ -24,7 +24,7 @@ export default function MapScreen({ navigation }) {
 
   let mapScreen = (
     <View style={styles.container}>
-      <Text>Waiting..</Text>
+      <Text>Загрузка</Text>
     </View>
   );
   if (errorMsg) {
@@ -34,7 +34,6 @@ export default function MapScreen({ navigation }) {
       </View>
     );
   } else if (location) {
-    let coords = JSON.stringify(location);
     mapScreen = (
       <View style={styles.container}>
         <MapView
@@ -47,7 +46,12 @@ export default function MapScreen({ navigation }) {
           style={styles.map}
         />
         <View style={styles.buttonBottomRaised}>
-          <RaisedButton navigation={navigation} path="Map" text="Добавить" />
+          <RaisedButton
+            navigation={navigation}
+            path="Map"
+            text="Добавить"
+            style={styles.buttonLogin}
+          />
         </View>
       </View>
     );

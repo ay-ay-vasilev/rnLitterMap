@@ -1,4 +1,4 @@
-export default [
+export const fakeData = [
   {
     cleaned: true,
     distance: "в 5 км",
@@ -28,3 +28,10 @@ export default [
     img: require("../assets/trash_4.jpg"),
   },
 ];
+
+export const fakeUser = {
+  name: "Иванов Иван",
+  dateOfBirth: "01.01.2000",
+  status: "Спасаю Землю",
+  username: "@username",
+};
