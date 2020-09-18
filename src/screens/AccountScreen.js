@@ -44,10 +44,8 @@ export default function AccountScreen({ navigation }) {
 
         <View style={{ alignItems: "center", marginTop: 20, marginBottom: 20 }}>
           <RaisedButton
-            navigation={navigation}
-            path="Account"
+            onPress={() => navigation.navigate("Account")}
             text="Сохранить"
-            style={styles.buttonLogin}
           />
         </View>
       </ScrollView>

@@ -16,10 +16,8 @@ export default function CardlistScreen({ navigation }) {
       <ScrollView>{dumpCards}</ScrollView>
       <View style={styles.buttonBottomRaised}>
         <RaisedButton
-          navigation={navigation}
-          path="Cardlist"
+          onPress={() => navigation.navigate("Cardlist")}
           text="Добавить"
-          style={styles.buttonLogin}
         />
       </View>
     </View>

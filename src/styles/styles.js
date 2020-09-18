@@ -40,9 +40,23 @@ export default StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
   },
-  buttonLogin: {
+  raisedButton: {
     width: 168,
     height: 36,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fabButtonSmall: {
+    width: 36,
+    height: 36,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fabButtonBig: {
+    width: 48,
+    height: 48,
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { AnimatedRegion } from "react-native-maps";
 
 import RaisedButton from "../components/RaisedButton";
+import CustomFAB from "../components/CustomFAB";
 import * as Location from "expo-location";
 
 import styles from "../styles/styles";
@@ -22,6 +23,13 @@ export default function MapScreen({ navigation }) {
     })();
   });
 
+  function goToInitialLocation() {
+    let initialRegion = Object.assign({}, location);
+    initialRegion["latitudeDelta"] = 0.005;
+    initialRegion["longitudeDelta"] = 0.005;
+    this.mapView.animateToRegion(initialRegion, 2000);
+  }
+
   let mapScreen = (
     <View style={styles.container}>
       <Text>Загрузка</Text>
@@ -40,18 +48,30 @@ export default function MapScreen({ navigation }) {
           initialRegion={{
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
           }}
           style={styles.map}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
         />
+
         <View style={styles.buttonBottomRaised}>
           <RaisedButton
-            navigation={navigation}
-            path="Map"
+            onPress={() => navigation.navigate("Map")}
             text="Добавить"
-            style={styles.buttonLogin}
           />
+        </View>
+        <View
+          style={{
+            position: "absolute",
+            top: "80%",
+            left: "80%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CustomFAB icon="crosshairs-gps" style={styles.fabButtonBig} />
         </View>
       </View>
     );

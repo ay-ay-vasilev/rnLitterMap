@@ -15,10 +15,8 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
       <RaisedButton
-        navigation={navigation}
-        path="MainNavigation"
+        onPress={() => navigation.navigate("MainNavigation")}
         text="Войти"
-        style={styles.buttonLogin}
       />
     </View>
   );

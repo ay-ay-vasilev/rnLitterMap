@@ -1,6 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import { Avatar, FAB } from "react-native-paper";
+import { Avatar } from "react-native-paper";
+
+import CustomFAB from "../components/CustomFAB";
+import styles from "../styles/styles";
 
 export default function AccountAvatar(props) {
   return (
@@ -12,12 +15,7 @@ export default function AccountAvatar(props) {
       />
 
       <View style={{ position: "absolute", top: "70%", left: "60%" }}>
-        <FAB
-          small
-          color="white"
-          icon="pencil"
-          style={{ backgroundColor: props.colors.PRIMARY_SOLID }}
-        />
+        <CustomFAB icon="pencil" style={styles.fabButtonSmall} />
       </View>
     </View>
   );

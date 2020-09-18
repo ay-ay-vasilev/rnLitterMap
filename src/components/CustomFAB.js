@@ -1,10 +1,10 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTheme } from "react-native-paper";
-import styles from "../styles/styles";
 
-export default function RaisedButton(props) {
+export default function CustomFAB(props) {
   const { colors } = useTheme();
 
   return (
@@ -12,10 +12,10 @@ export default function RaisedButton(props) {
       colors={[colors.PRIMARY_GRADIENT_1, colors.PRIMARY_GRADIENT_2]}
       start={{ x: 0, y: 1 }}
       end={{ x: 1, y: 1 }}
-      style={styles.raisedButton}
+      style={props.style}
     >
-      <TouchableOpacity onPress={props.onPress} style={styles.raisedButton}>
-        <Text style={styles.whiteText}>{props.text}</Text>
+      <TouchableOpacity style={props.style} onPress={props.onPress}>
+        <MaterialCommunityIcons name={props.icon} color="white" size={24} />
       </TouchableOpacity>
     </LinearGradient>
   );
