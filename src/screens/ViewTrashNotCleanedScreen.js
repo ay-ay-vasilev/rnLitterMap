@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme, Avatar } from "react-native-paper";
 import styles from "../styles/styles";
 import { LinearGradient } from "expo-linear-gradient";
+// Custom components
 import RaisedButton from "../components/RaisedButton";
+import InfoList from "../components/InfoList";
+import UserCard from "../components/UserCard";
 
-import { fakeData } from "../test/testData";
+import { fakeData, fakeUser } from "../test/testData";
 
 export default function ViewTrashNotCleanedScreen() {
   const { colors } = useTheme();
@@ -56,15 +59,10 @@ export default function ViewTrashNotCleanedScreen() {
           textStyle={styles.whiteTextMedium}
         />
       </View>
-      <View
-        style={{
-          alignItems: "center",
-          width: "100%",
-          borderBottomColor: colors.LIGHT_GREY,
-          borderBottomWidth: 1,
-        }}
-      >
-        <Text style={{ fontWeight: "bold", lineHeight: 40 }}>Информация</Text>
+
+      <View style={{ width: "100%", flex: 1 }}>
+        <InfoList />
+        <UserCard user={fakeUser} />
       </View>
     </View>
   );
