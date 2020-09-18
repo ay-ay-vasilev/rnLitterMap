@@ -14,7 +14,7 @@ export default function CardlistScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>{dumpCards}</ScrollView>
-      <View style={styles.buttonBottomRaised}>
+      <View style={styles.buttonBottomRaisedWrapper}>
         <RaisedButton
           onPress={() => navigation.navigate("Cardlist")}
           text="Добавить"

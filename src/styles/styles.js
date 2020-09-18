@@ -21,7 +21,7 @@ export default StyleSheet.create({
   loginLogoWrapper: {
     alignSelf: "center",
   },
-  buttonBottomRaised: {
+  buttonBottomRaisedWrapper: {
     position: "absolute",
     top: "90%",
     left: 0,
@@ -29,6 +29,13 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "flex-end",
+  },
+  fabButtonLocationWrapper: {
+    position: "absolute",
+    top: "80%",
+    left: "80%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonGradient: {
     padding: 25,

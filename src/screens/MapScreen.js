@@ -24,10 +24,12 @@ export default function MapScreen({ navigation }) {
   });
 
   function goToInitialLocation() {
-    let initialRegion = Object.assign({}, location);
-    initialRegion["latitudeDelta"] = 0.005;
-    initialRegion["longitudeDelta"] = 0.005;
-    this.mapView.animateToRegion(initialRegion, 2000);
+    this.map.animateToRegion({
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05,
+    });
   }
 
   let mapScreen = (
@@ -45,6 +47,9 @@ export default function MapScreen({ navigation }) {
     mapScreen = (
       <View style={styles.container}>
         <MapView
+          ref={(map) => {
+            this.map = map;
+          }}
           initialRegion={{
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
@@ -56,22 +61,18 @@ export default function MapScreen({ navigation }) {
           showsMyLocationButton={true}
         />
 
-        <View style={styles.buttonBottomRaised}>
+        <View style={styles.buttonBottomRaisedWrapper}>
           <RaisedButton
             onPress={() => navigation.navigate("Map")}
             text="Добавить"
           />
         </View>
-        <View
-          style={{
-            position: "absolute",
-            top: "80%",
-            left: "80%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CustomFAB icon="crosshairs-gps" style={styles.fabButtonBig} />
+        <View style={styles.fabButtonLocationWrapper}>
+          <CustomFAB
+            icon="crosshairs-gps"
+            style={styles.fabButtonBig}
+            onPress={() => goToInitialLocation()}
+          />
         </View>
       </View>
     );
