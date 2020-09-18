@@ -20,7 +20,10 @@ export default function UserCard(props) {
           alignItems: "center",
         }}
       >
-        <Avatar.Image source={require("../assets/no-img-new.png")} />
+        <Avatar.Image
+          source={require("../assets/no-img-new.png")}
+          style={{ backgroundColor: colors.LIGHT_GREY }}
+        />
         <Text
           style={{
             padding: 13,

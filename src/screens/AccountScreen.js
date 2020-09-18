@@ -16,7 +16,7 @@ export default function AccountScreen({ navigation }) {
   return (
     <View>
       <ScrollView>
-        <AccountAvatar colors={colors} />
+        <AccountAvatar />
 
         <AccountPropertyCard
           propertyName="Имя"
