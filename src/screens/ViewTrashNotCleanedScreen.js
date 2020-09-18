@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { useTheme, Appbar } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 import styles from "../styles/styles";
 // Custom components
 import RaisedButton from "../components/RaisedButton";
@@ -11,7 +11,9 @@ import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 
 import { fakeData, fakeUser } from "../test/testData";
 
-export default function ViewTrashNotCleanedScreen() {
+export default function ViewTrashNotCleanedScreen({ route, navigation }) {
+  const { data } = route.params;
+
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header
@@ -21,7 +23,11 @@ export default function ViewTrashNotCleanedScreen() {
           backgroundColor: "transparent",
         }}
       >
-        <Appbar.BackAction style={{ position: "absolute" }} color={"white"} />
+        <Appbar.BackAction
+          style={{ position: "absolute" }}
+          color={"white"}
+          onPress={() => navigation.goBack()}
+        />
         <Text
           style={{
             color: "white",
@@ -34,7 +40,7 @@ export default function ViewTrashNotCleanedScreen() {
         </Text>
       </Appbar.Header>
 
-      <PhotoMenuNotCleaned />
+      <PhotoMenuNotCleaned photo={data.img} />
       <View style={{ flex: 1, width: "100%", alignItems: "center" }}>
         <GradientHighlightRed />
         <View

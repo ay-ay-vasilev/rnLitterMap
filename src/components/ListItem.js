@@ -30,6 +30,7 @@ export default function ListItem(props) {
         </Text>
       }
       description={props.element.date}
+      onPress={props.onPress}
       left={() => (
         <Image source={props.element.img} style={{ width: 85, height: 85 }} />
       )}

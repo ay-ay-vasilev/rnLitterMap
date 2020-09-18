@@ -11,10 +11,7 @@ export function PhotoMenuNotCleaned(props) {
         alignItems: "center",
       }}
     >
-      <Image
-        source={require("../assets/trash_2.jpg")}
-        style={{ flex: 1, resizeMode: "contain" }}
-      />
+      <Image source={props.photo} style={{ flex: 1, resizeMode: "contain" }} />
       <LinearGradient
         colors={[
           "rgba(0,0,0, 0.9)",

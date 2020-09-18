@@ -8,7 +8,13 @@ import { fakeData } from "../test/testData";
 
 export default function CardlistScreen({ navigation }) {
   const dumpCards = fakeData.map((element, index) => (
-    <ListItem key={index} element={element} />
+    <ListItem
+      key={index}
+      element={element}
+      onPress={() =>
+        navigation.navigate("ViewTrashNotCleaned", { data: element })
+      }
+    />
   ));
 
   return (
@@ -19,7 +25,7 @@ export default function CardlistScreen({ navigation }) {
           onPress={() => navigation.navigate("Cardlist")}
           text="Добавить"
           buttonStyle={styles.raisedButton}
-          textStyle={styles.whiteTextMedium}
+          textStyle={styles.whiteTextSmall}
         />
       </View>
     </View>

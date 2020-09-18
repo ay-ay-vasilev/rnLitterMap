@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MainNavigation from "./MainNavigation";
 
 import LoginScreen from "../screens/LoginScreen";
+import ViewTrashNotCleanedScreen from "../screens/ViewTrashNotCleanedScreen";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,10 @@ export default function LoginNavigation() {
       >
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="MainNavigation" component={MainNavigation} />
+        <Stack.Screen
+          name="ViewTrashNotCleaned"
+          component={ViewTrashNotCleanedScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

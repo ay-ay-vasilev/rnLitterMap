@@ -25,20 +25,20 @@ export default function AccountScreen({ navigation }) {
         />
 
         <AccountPropertyCard
-          propertyName={fakeUser.dateOfBirth}
-          propertyValue="01.01.2000"
+          propertyName="Дата рождения"
+          propertyValue={fakeUser.dateOfBirth}
           colors={colors}
         />
 
         <AccountPropertyCard
-          propertyName={fakeUser.status}
-          propertyValue="Спасаю Землю"
+          propertyName="Статус"
+          propertyValue={fakeUser.status}
           colors={colors}
         />
 
         <AccountPropertyCard
-          propertyName={fakeUser.username}
-          propertyValue="@username"
+          propertyName="Имя пользователя"
+          propertyValue={fakeUser.username}
           colors={colors}
         />
 
@@ -47,7 +47,7 @@ export default function AccountScreen({ navigation }) {
             onPress={() => navigation.navigate("Account")}
             text="Сохранить"
             buttonStyle={styles.raisedButton}
-            textStyle={styles.whiteTextMedium}
+            textStyle={styles.whiteTextSmall}
           />
         </View>
       </ScrollView>

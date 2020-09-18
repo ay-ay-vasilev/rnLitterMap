@@ -8,6 +8,7 @@ import { useTheme } from "react-native-paper";
 import MapScreen from "../screens/MapScreen";
 import CardlistScreen from "../screens/CardlistScreen";
 import AccountScreen from "../screens/AccountScreen";
+import ViewTrashNotCleanedScreen from "../screens/ViewTrashNotCleanedScreen";
 
 import { GradientSelected } from "../utils/utils";
 

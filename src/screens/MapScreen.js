@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
-import MapView, { AnimatedRegion } from "react-native-maps";
+import MapView from "react-native-maps";
 
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
@@ -66,7 +66,7 @@ export default function MapScreen({ navigation }) {
             onPress={() => navigation.navigate("Map")}
             text="Добавить"
             buttonStyle={styles.raisedButton}
-            textStyle={styles.whiteTextMedium}
+            textStyle={styles.whiteTextSmall}
           />
         </View>
         <View style={styles.fabButtonLocationWrapper}>
