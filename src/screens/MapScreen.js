@@ -65,6 +65,8 @@ export default function MapScreen({ navigation }) {
           <RaisedButton
             onPress={() => navigation.navigate("Map")}
             text="Добавить"
+            buttonStyle={styles.raisedButton}
+            textStyle={styles.whiteTextMedium}
           />
         </View>
         <View style={styles.fabButtonLocationWrapper}>

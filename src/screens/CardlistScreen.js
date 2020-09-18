@@ -18,6 +18,8 @@ export default function CardlistScreen({ navigation }) {
         <RaisedButton
           onPress={() => navigation.navigate("Cardlist")}
           text="Добавить"
+          buttonStyle={styles.raisedButton}
+          textStyle={styles.whiteTextMedium}
         />
       </View>
     </View>

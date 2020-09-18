@@ -46,6 +46,8 @@ export default function AccountScreen({ navigation }) {
           <RaisedButton
             onPress={() => navigation.navigate("Account")}
             text="Сохранить"
+            buttonStyle={styles.raisedButton}
+            textStyle={styles.whiteTextMedium}
           />
         </View>
       </ScrollView>

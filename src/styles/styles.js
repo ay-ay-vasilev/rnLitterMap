@@ -18,6 +18,46 @@ export default StyleSheet.create({
     width: 170,
     height: 170,
   },
+  // BUTTONS
+  buttonGradient: {
+    padding: 25,
+    alignItems: "center",
+    borderRadius: 25,
+  },
+  bottomNavButtonGradient: {
+    padding: 15,
+    alignItems: "center",
+    borderRadius: 5,
+  },
+  raisedButton: {
+    width: 168,
+    height: 36,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  raisedButtonBig: {
+    width: 222,
+    height: 45,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fabButtonSmall: {
+    width: 36,
+    height: 36,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fabButtonBig: {
+    width: 48,
+    height: 48,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  // WRAPPERS
   loginLogoWrapper: {
     alignSelf: "center",
   },
@@ -37,40 +77,16 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonGradient: {
-    padding: 25,
-    alignItems: "center",
-    borderRadius: 25,
-  },
-  bottomNavButtonGradient: {
-    padding: 15,
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  raisedButton: {
-    width: 168,
-    height: 36,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  fabButtonSmall: {
-    width: 36,
-    height: 36,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  fabButtonBig: {
-    width: 48,
-    height: 48,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  whiteText: {
+  // TEXT
+  whiteTextSmall: {
     color: "white",
+    fontSize: 14,
   },
+  whiteTextMedium: {
+    color: "white",
+    fontSize: 20,
+  },
+  // CARDLISTS
   cardListTitle1Cleaned: {
     color: theme.colors.PRIMARY_SOLID,
     fontWeight: "bold",
