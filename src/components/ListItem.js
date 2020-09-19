@@ -24,7 +24,7 @@ export default function ListItem(props) {
             {`\n`}
           </Text>
           <Text style={styles.cardListTitle2}>
-            {props.element.distance}
+            в {props.distance / 1000} км
             {`\n`}
           </Text>
           <Text style={styles.cardListTitle3}>

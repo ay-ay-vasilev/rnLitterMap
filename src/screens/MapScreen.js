@@ -45,7 +45,6 @@ export default function MapScreen({ navigation }) {
       </View>
     );
   } else if (location) {
-    console.log(location);
     mapScreen = (
       <View style={styles.container}>
         <MapView
