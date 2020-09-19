@@ -104,4 +104,9 @@ export default StyleSheet.create({
   cardListTitle3: {
     color: "black",
   },
+  // OTHER
+  lottie: {
+    width: 500,
+    height: 500,
+  },
 });

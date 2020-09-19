@@ -5,6 +5,8 @@ import { useTheme } from "react-native-paper";
 
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
+import Loading from "../components/Loading";
+
 import * as Location from "expo-location";
 
 import styles from "../styles/styles";
@@ -39,11 +41,7 @@ export default function MapScreen({ navigation }) {
     });
   }
 
-  let mapScreen = (
-    <View style={styles.container}>
-      <Text>Загрузка</Text>
-    </View>
-  );
+  let mapScreen = <Loading />;
   if (errorMsg) {
     mapScreen = (
       <View style={styles.container}>

@@ -3,6 +3,8 @@ import { View, ScrollView, Text } from "react-native";
 import * as Location from "expo-location";
 import { getDistance } from "geolib";
 
+import Loading from "../components/Loading";
+
 import styles from "../styles/styles";
 import RaisedButton from "../components/RaisedButton";
 import ListItem from "../components/ListItem";
@@ -24,20 +26,9 @@ export default function CardlistScreen({ navigation }) {
     })();
   });
 
-  let dumpCards = (
-    <View
-      style={{
-        flex: 1,
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text>Загрузка</Text>
-    </View>
-  );
+  let cardListScreen = <Loading />;
   if (errorMsg) {
-    dumpCards = (
+    cardListScreen = (
       <View
         style={{
           flex: 1,
@@ -50,7 +41,7 @@ export default function CardlistScreen({ navigation }) {
       </View>
     );
   } else if (location) {
-    dumpCards = fakeData.map((element, index) => (
+    let dumpCards = fakeData.map((element, index) => (
       <ListItem
         key={index}
         element={element}
@@ -63,19 +54,20 @@ export default function CardlistScreen({ navigation }) {
         }
       />
     ));
+    cardListScreen = (
+      <View style={{ flex: 1 }}>
+        <ScrollView>{dumpCards}</ScrollView>
+        <View style={styles.buttonBottomRaisedWrapper}>
+          <RaisedButton
+            onPress={() => navigation.navigate("Cardlist")}
+            text="Добавить"
+            buttonStyle={styles.raisedButton}
+            textStyle={styles.whiteTextSmall}
+          />
+        </View>
+      </View>
+    );
   }
 
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView>{dumpCards}</ScrollView>
-      <View style={styles.buttonBottomRaisedWrapper}>
-        <RaisedButton
-          onPress={() => navigation.navigate("Cardlist")}
-          text="Добавить"
-          buttonStyle={styles.raisedButton}
-          textStyle={styles.whiteTextSmall}
-        />
-      </View>
-    </View>
-  );
+  return <View style={{ flex: 1 }}>{cardListScreen}</View>;
 }
