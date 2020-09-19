@@ -5,6 +5,18 @@ import styles from "../styles/styles";
 import { translateSize } from "../utils/utils";
 import moment from "moment";
 
+function formatDistance(distance) {
+  if (distance < 100) {
+    return "< 100 метров";
+  } else if (distance < 1000) {
+    return `в ${Number(distance / 100).toFixed(0) * 100} метрах`;
+  } else if (distance > 10000) {
+    return "> 10 км";
+  } else {
+    return `в ${Number(distance / 1000).toFixed(0)} км`;
+  }
+}
+
 export default function ListItem(props) {
   const formattedDate = moment(props.element.date).fromNow();
 
@@ -24,7 +36,7 @@ export default function ListItem(props) {
             {`\n`}
           </Text>
           <Text style={styles.cardListTitle2}>
-            в {props.distance / 1000} км
+            {formatDistance(props.distance)}
             {`\n`}
           </Text>
           <Text style={styles.cardListTitle3}>

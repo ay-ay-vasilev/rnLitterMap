@@ -1,7 +1,7 @@
 export const fakeData = [
   {
     cleaned: false,
-    location: { latitude: 39.4219859, longitude: -135.083984 },
+    location: { latitude: 37.4219859, longitude: -122.183984 },
     distance: "в 5 км",
     size: "small",
     date: "2020-09-17",
@@ -9,7 +9,7 @@ export const fakeData = [
   },
   {
     cleaned: false,
-    location: { latitude: 37.4319859, longitude: -122.083984 },
+    location: { latitude: 37.4299859, longitude: -122.083984 },
     distance: "в 100 м",
     size: "medium",
     date: "2020-09-11",
