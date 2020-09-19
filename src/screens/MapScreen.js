@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
 import * as Location from "expo-location";
 
 import styles from "../styles/styles";
+import { fakeData } from "../test/testData";
 
 export default function MapScreen({ navigation }) {
   const [location, setLocation] = useState(null);
@@ -44,6 +45,7 @@ export default function MapScreen({ navigation }) {
       </View>
     );
   } else if (location) {
+    console.log(location);
     mapScreen = (
       <View style={styles.container}>
         <MapView
@@ -59,7 +61,16 @@ export default function MapScreen({ navigation }) {
           style={styles.map}
           showsUserLocation={true}
           showsMyLocationButton={true}
-        />
+        >
+          {fakeData.map((marker, index) => (
+            <Marker
+              key={index}
+              coordinate={marker.location}
+              title={marker.size}
+              description={marker.size}
+            />
+          ))}
+        </MapView>
 
         <View style={styles.buttonBottomRaisedWrapper}>
           <RaisedButton
