@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Appbar } from "react-native-paper";
+
 import styles from "../styles/styles";
 // Custom components
 import RaisedButton from "../components/RaisedButton";
@@ -16,31 +16,11 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Appbar.Header
-        style={{
-          position: "absolute",
-          width: "100%",
-          backgroundColor: "transparent",
-        }}
-      >
-        <Appbar.BackAction
-          style={{ position: "absolute" }}
-          color={"white"}
-          onPress={() => navigation.goBack()}
-        />
-        <Text
-          style={{
-            color: "white",
-            flex: 1,
-            textAlign: "center",
-            fontSize: 22,
-          }}
-        >
-          НЕ УБРАНО
-        </Text>
-      </Appbar.Header>
+      <PhotoMenuNotCleaned
+        photo={data.img}
+        onPress={() => navigation.goBack()}
+      />
 
-      <PhotoMenuNotCleaned photo={data.img} />
       <View style={{ flex: 1, width: "100%", alignItems: "center" }}>
         <GradientHighlightRed />
         <View
