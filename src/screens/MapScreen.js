@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { useTheme } from "react-native-paper";
 
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
@@ -12,6 +13,8 @@ import { fakeData } from "../test/testData";
 export default function MapScreen({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const { colors } = useTheme();
 
   useEffect(() => {
     (async () => {
@@ -54,12 +57,16 @@ export default function MapScreen({ navigation }) {
           initialRegion={{
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5,
           }}
           style={styles.map}
           showsUserLocation={true}
           showsMyLocationButton={true}
+          showsPointsOfInterest={false}
+          showsBuildings={false}
+          showsTraffic={false}
+          showsIndoors={false}
         >
           {fakeData.map((marker, index) => (
             <Marker
@@ -67,6 +74,9 @@ export default function MapScreen({ navigation }) {
               coordinate={marker.location}
               title={marker.size}
               description={marker.size}
+              pinColor={
+                marker.cleaned ? colors.PRIMARY_SOLID : colors.SECONDARY_SOLID
+              }
             />
           ))}
         </MapView>
