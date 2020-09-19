@@ -22,7 +22,7 @@ export function PhotoMenuNotCleaned(props) {
       >
         <Image
           source={props.photo}
-          style={{ flex: 1, width: "100%", backgroundColor: "red" }}
+          style={{ flex: 1, width: "100%", backgroundColor: "black" }}
         />
         <LinearGradient
           colors={[
@@ -56,7 +56,7 @@ export function PhotoMenuNotCleaned(props) {
             fontSize: 22,
           }}
         >
-          НЕ УБРАНО
+          {props.text}
         </Text>
         <TouchableOpacity
           onPress={props.onPress}

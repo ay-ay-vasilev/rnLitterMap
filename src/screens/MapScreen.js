@@ -103,7 +103,7 @@ export default function MapScreen({ navigation }) {
 
         <View style={styles.buttonBottomRaisedWrapper}>
           <RaisedButton
-            onPress={() => navigation.navigate("Map")}
+            onPress={() => navigation.navigate("AddTrashCard")}
             text="Добавить"
             buttonStyle={styles.raisedButton}
             textStyle={styles.whiteTextSmall}

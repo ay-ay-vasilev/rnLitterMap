@@ -59,7 +59,7 @@ export default function CardlistScreen({ navigation }) {
         <ScrollView>{dumpCards}</ScrollView>
         <View style={styles.buttonBottomRaisedWrapper}>
           <RaisedButton
-            onPress={() => navigation.navigate("Cardlist")}
+            onPress={() => navigation.navigate("AddTrashCard")}
             text="Добавить"
             buttonStyle={styles.raisedButton}
             textStyle={styles.whiteTextSmall}

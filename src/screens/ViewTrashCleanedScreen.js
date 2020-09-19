@@ -19,6 +19,7 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
     <View style={{ flex: 1 }}>
       <PhotoMenuNotCleaned
         photo={data.img}
+        text="УБРАНО"
         onPress={() => navigation.goBack()}
       />
 
