@@ -10,6 +10,9 @@ import * as Location from "expo-location";
 import styles from "../styles/styles";
 import { fakeData } from "../test/testData";
 
+import { translateSize } from "../utils/utils";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 export default function MapScreen({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -72,12 +75,31 @@ export default function MapScreen({ navigation }) {
             <Marker
               key={index}
               coordinate={marker.location}
-              title={marker.size}
-              description={marker.size}
-              pinColor={
-                marker.cleaned ? colors.PRIMARY_SOLID : colors.SECONDARY_SOLID
-              }
-            />
+              title={marker.cleaned ? "Убрано" : "Не убрано"}
+              description={translateSize(marker.size)}
+            >
+              <View
+                style={{
+                  backgroundColor: "white",
+                  elevation: 2,
+                  borderRadius: 25,
+                  width: 34,
+                  height: 34,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="delete-circle"
+                  size={32}
+                  color={
+                    marker.cleaned
+                      ? colors.PRIMARY_SOLID
+                      : colors.SECONDARY_SOLID
+                  }
+                />
+              </View>
+            </Marker>
           ))}
         </MapView>
 
