@@ -1,6 +1,6 @@
 export const fakeData = [
   {
-    cleaned: false,
+    cleaned: true,
     location: { latitude: 37.4219859, longitude: -122.183984 },
     distance: "в 5 км",
     size: "small",
@@ -16,7 +16,7 @@ export const fakeData = [
     img: require("../assets/trash_2.jpg"),
   },
   {
-    cleaned: false,
+    cleaned: true,
     location: { latitude: 30.4219859, longitude: -102.083984 },
     distance: "> 10 км",
     size: "small",
@@ -24,7 +24,7 @@ export const fakeData = [
     img: require("../assets/trash_3.jpg"),
   },
   {
-    cleaned: false,
+    cleaned: true,
     location: { latitude: 57.4219859, longitude: -110.083984 },
     distance: "> 10 км",
     size: "big",

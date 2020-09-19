@@ -1,18 +1,19 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import { useTheme } from "react-native-paper";
 
 import styles from "../styles/styles";
 // Custom components
-import RaisedButton from "../components/RaisedButton";
 import InfoList from "../components/InfoList";
 import UserCard from "../components/UserCard";
-import { GradientHighlightRed } from "../components/GradientHighlight";
+import { GradientHighlightGreen } from "../components/GradientHighlight";
 import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 
 import { fakeUser } from "../test/testData";
 
 export default function ViewTrashNotCleanedScreen({ route, navigation }) {
   const { data } = route.params;
+  const { colors } = useTheme();
 
   return (
     <View style={{ flex: 1 }}>
@@ -22,7 +23,7 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
       />
 
       <View style={{ flex: 1, width: "100%", alignItems: "center" }}>
-        <GradientHighlightRed />
+        <GradientHighlightGreen />
         <View
           style={{
             alignItems: "center",
@@ -30,11 +31,9 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
             marginBottom: 20,
           }}
         >
-          <RaisedButton
-            text="Убрать"
-            buttonStyle={styles.raisedButtonBig}
-            textStyle={styles.whiteTextMedium}
-          />
+          <Text style={{ fontSize: 26, color: colors.PRIMARY_SOLID }}>
+            УБРАНО
+          </Text>
         </View>
 
         <View style={{ width: "100%", flex: 1 }}>

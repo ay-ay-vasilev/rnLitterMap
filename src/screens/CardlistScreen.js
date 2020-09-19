@@ -56,7 +56,10 @@ export default function CardlistScreen({ navigation }) {
         element={element}
         distance={getDistance(location.coords, element.location)}
         onPress={() =>
-          navigation.navigate("ViewTrashNotCleaned", { data: element })
+          navigation.navigate(
+            element.cleaned ? "ViewTrashCleaned" : "ViewTrashNotCleaned",
+            { data: element }
+          )
         }
       />
     ));

@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Text } from "react-native";
-import { List } from "react-native-paper";
+import { List, useTheme } from "react-native-paper";
 import styles from "../styles/styles";
 import {
   translateSize,
@@ -9,8 +9,11 @@ import {
 } from "../utils/utils";
 
 export default function ListItem(props) {
+  const { colors } = useTheme();
+
   return (
     <List.Item
+      style={{ borderBottomColor: colors.LIGHT_GREY, borderBottomWidth: 1 }}
       titleNumberOfLines={3}
       title={
         <Text>

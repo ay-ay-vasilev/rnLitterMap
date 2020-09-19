@@ -9,7 +9,7 @@ export default function CategoryText(props) {
     <View style={{ flex: 1, flexDirection: "row" }}>
       <View
         style={{
-          flex: 1,
+          flex: 2,
           justifyContent: "center",
           margin: "1%",
         }}
@@ -20,7 +20,7 @@ export default function CategoryText(props) {
       </View>
       <View
         style={{
-          flex: 1,
+          flex: 3,
           justifyContent: "center",
           margin: "1%",
         }}
