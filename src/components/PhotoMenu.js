@@ -5,7 +5,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export function PhotoMenuNotCleaned(props) {
   return (
-    <View style={{ flex: 1, width: "100%", alignItems: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        backgroundColor: "black",
+      }}
+    >
       <View
         style={{
           flex: 1,
@@ -15,7 +22,7 @@ export function PhotoMenuNotCleaned(props) {
       >
         <Image
           source={props.photo}
-          style={{ flex: 1, resizeMode: "contain" }}
+          style={{ flex: 1, width: "100%", backgroundColor: "red" }}
         />
         <LinearGradient
           colors={[

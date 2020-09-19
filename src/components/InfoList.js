@@ -4,7 +4,9 @@ import CategoryText from "./CategoryText";
 
 import { useTheme } from "react-native-paper";
 
-export default function InfoList() {
+import { translateSize, formatDate } from "../utils/utils";
+
+export default function InfoList(props) {
   const { colors } = useTheme();
 
   return (
@@ -40,11 +42,11 @@ export default function InfoList() {
         >
           <CategoryText
             categoryName="Размер"
-            categoryValue="Хватит одного пакета"
+            categoryValue={translateSize(props.data.size)}
           />
           <CategoryText
             categoryName="Добавлено"
-            categoryValue="12 сент. 2020 г."
+            categoryValue={formatDate(props.data.date)}
           />
         </View>
       </View>

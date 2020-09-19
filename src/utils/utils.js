@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-community/masked-view";
+import moment from "moment";
 
 export function GradientSelected(focused, iconName, colors) {
   return focused ? (
@@ -52,4 +53,24 @@ export function translateSize(value) {
     default:
       return "Неизвестно";
   }
+}
+
+export function formatDistance(distance) {
+  if (distance < 100) {
+    return "< 100 метров";
+  } else if (distance < 1000) {
+    return `в ${Number(distance / 100).toFixed(0) * 100} метрах`;
+  } else if (distance > 10000) {
+    return "> 10 км";
+  } else {
+    return `в ${Number(distance / 1000).toFixed(0)} км`;
+  }
+}
+
+export function formatDateRelative(date) {
+  return moment(date).fromNow();
+}
+
+export function formatDate(date) {
+  return moment(date).format("ll");
 }

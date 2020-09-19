@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import styles from "../styles/styles";
 // Custom components
@@ -38,7 +38,7 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
         </View>
 
         <View style={{ width: "100%", flex: 1 }}>
-          <InfoList />
+          <InfoList data={data} />
           <UserCard user={fakeUser} />
         </View>
       </View>
