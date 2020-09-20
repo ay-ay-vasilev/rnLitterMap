@@ -5,7 +5,6 @@ import styles from "../styles/styles";
 
 export default function RadioList(props) {
   const { colors } = useTheme();
-  const [checked, setChecked] = useState(0);
 
   const radioList = props.options.map((item, index) => (
     <View
@@ -18,8 +17,8 @@ export default function RadioList(props) {
     >
       <RadioButton
         value={index}
-        status={checked === index ? "checked" : "unchecked"}
-        onPress={() => setChecked(index)}
+        status={props.checked === index ? "checked" : "unchecked"}
+        onPress={() => props.setChecked(index)}
         color={colors.PRIMARY_SOLID}
       />
       <Text style={{ textAlignVertical: "center" }}>{item}</Text>
