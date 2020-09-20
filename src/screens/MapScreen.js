@@ -44,13 +44,13 @@ export default function MapScreen({ navigation }) {
   let mapScreen = <Loading />;
   if (errorMsg) {
     mapScreen = (
-      <View style={styles.container}>
+      <View style={styles.containerWhite}>
         <Text>{errorMsg}</Text>
       </View>
     );
   } else if (location) {
     mapScreen = (
-      <View style={styles.container}>
+      <View style={styles.containerWhite}>
         <MapView
           ref={(map) => {
             this.map = map;
@@ -120,5 +120,5 @@ export default function MapScreen({ navigation }) {
     );
   }
 
-  return <View style={styles.container}>{mapScreen}</View>;
+  return <View style={styles.containerWhite}>{mapScreen}</View>;
 }

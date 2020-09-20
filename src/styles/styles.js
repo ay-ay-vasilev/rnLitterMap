@@ -1,15 +1,23 @@
-import { Dimensions } from "react-native";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 import theme from "./theme.style";
 
 export default StyleSheet.create({
-  container: {
+  containerWhite: {
     flex: 1,
-    backgroundColor: "#fff",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#fff",
   },
+  containerBlack: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+  },
+  containerTransparent: { flex: 1, width: "100%", alignItems: "center" },
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
@@ -58,6 +66,28 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   // WRAPPERS
+  radioListWrapper: {
+    width: "100%",
+    borderTopColor: theme.colors.LIGHT_GREY,
+    borderTopWidth: 1,
+    borderBottomColor: theme.colors.LIGHT_GREY,
+    borderBottomWidth: 1,
+    alignItems: "flex-start",
+  },
+  commonWrapper: {
+    width: "100%",
+    justifyContent: "center",
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  centeredCommonWrapper: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    marginTop: 20,
+  },
+
   loginLogoWrapper: {
     alignSelf: "center",
   },
@@ -86,6 +116,7 @@ export default StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
+  whiteTextBig: { color: "white", textAlign: "center", fontSize: 22 },
   // CARDLISTS
   cardListTitle1Cleaned: {
     color: theme.colors.PRIMARY_SOLID,

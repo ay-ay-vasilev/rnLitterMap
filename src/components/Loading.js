@@ -8,7 +8,7 @@ export default function Loading() {
   const { colors } = useTheme();
 
   return (
-    <View styles={styles.container}>
+    <View styles={styles.containerWhite}>
       <AnimatedLoader
         visible={true}
         overlayColor="rgba(255,255,255,0)"

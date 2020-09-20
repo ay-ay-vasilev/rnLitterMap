@@ -4,7 +4,7 @@ import styles from "../styles/styles";
 import RaisedButton from "../components/RaisedButton";
 
 export default LoginScreen = ({ navigation }) => (
-  <View style={styles.container}>
+  <View style={styles.containerWhite}>
     <View style={styles.loginLogoWrapper}>
       <Image
         source={require("../assets/logo-vertical.png")}

@@ -42,7 +42,7 @@ export default function AccountScreen({ navigation }) {
           colors={colors}
         />
 
-        <View style={{ alignItems: "center", marginTop: 20, marginBottom: 20 }}>
+        <View style={styles.centeredCommonWrapper}>
           <RaisedButton
             onPress={() => navigation.navigate("Account")}
             text="Сохранить"

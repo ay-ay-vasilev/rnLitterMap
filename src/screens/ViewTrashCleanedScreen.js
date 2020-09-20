@@ -6,7 +6,7 @@ import styles from "../styles/styles";
 // Custom components
 import InfoList from "../components/InfoList";
 import UserCard from "../components/UserCard";
-import { GradientHighlightGreen } from "../components/GradientHighlight";
+import { GradientHighlightGreen } from "../components/Gradients";
 import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 
 import { fakeUser } from "../test/testData";
@@ -29,7 +29,8 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
           style={{
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: 20,
+            marginBottom: 10,
+            marginTop: 10,
           }}
         >
           <Text style={{ fontSize: 26, color: colors.PRIMARY_SOLID }}>

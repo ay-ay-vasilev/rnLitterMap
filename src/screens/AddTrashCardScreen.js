@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text } from "react-native";
-import { useTheme, RadioButton } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 
 import styles from "../styles/styles";
 // Custom components
 import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
+import RadioList from "../components/RadioList";
 
 export default function AddTrashCardScreen({ navigation }) {
   const { colors } = useTheme();
-  const [checked, setChecked] = useState("first");
 
   return (
     <View style={{ flex: 1 }}>
@@ -26,86 +26,19 @@ export default function AddTrashCardScreen({ navigation }) {
           alignItems: "center",
         }}
       >
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 20,
-            marginTop: 20,
-          }}
-        >
+        <View style={styles.centeredCommonWrapper}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>
             Размер мусора
           </Text>
         </View>
 
-        <View
-          style={{
-            width: "100%",
-            flex: 1,
-            borderTopColor: colors.LIGHT_GREY,
-            borderTopWidth: 1,
-            borderBottomColor: colors.LIGHT_GREY,
-            borderBottomWidth: 1,
-            alignItems: "flex-start",
-            justifyContent: "center",
-            marginLeft: 60,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <RadioButton
-              value="first"
-              status={checked === "first" ? "checked" : "unchecked"}
-              onPress={() => setChecked("first")}
-              color={colors.PRIMARY_SOLID}
-            />
-            <Text style={{ textAlignVertical: "center" }}>Один пакет</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <RadioButton
-              value="second"
-              status={checked === "second" ? "checked" : "unchecked"}
-              onPress={() => setChecked("second")}
-              color={colors.PRIMARY_SOLID}
-            />
-            <Text style={{ textAlignVertical: "center" }}>
-              Несколько пакетов
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <RadioButton
-              value="third"
-              status={checked === "third" ? "checked" : "unchecked"}
-              onPress={() => setChecked("third")}
-              color={colors.PRIMARY_SOLID}
-            />
-            <Text style={{ textAlignVertical: "center" }}>Грузовая машина</Text>
-          </View>
+        <View style={styles.radioListWrapper}>
+          <RadioList
+            options={["Один пакет", "Несколько пакетов", "Грузовая машина"]}
+          />
         </View>
 
-        <View
-          style={{
-            width: "100%",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <View style={styles.centeredCommonWrapper}>
           <RaisedButton
             onPress={() => navigation.navigate("AddTrashCard")}
             text="Добавить"
