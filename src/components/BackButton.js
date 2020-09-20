@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function BackButton() {
+export default function BackButton(props) {
   return (
     <TouchableOpacity
       onPress={props.onPress}

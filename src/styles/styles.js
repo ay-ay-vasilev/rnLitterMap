@@ -54,14 +54,14 @@ export default StyleSheet.create({
   fabButtonSmall: {
     width: 36,
     height: 36,
-    borderRadius: 25,
+    borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
   },
   fabButtonBig: {
-    width: 48,
-    height: 48,
-    borderRadius: 25,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     alignItems: "center",
     justifyContent: "center",
   },

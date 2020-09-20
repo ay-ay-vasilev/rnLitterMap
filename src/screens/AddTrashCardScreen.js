@@ -4,7 +4,7 @@ import { useTheme } from "react-native-paper";
 
 import styles from "../styles/styles";
 // Custom components
-import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
+import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
 import RadioList from "../components/RadioList";
 
@@ -13,7 +13,7 @@ export default function AddTrashCardScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <PhotoMenuNotCleaned
+      <PhotoMenuUpload
         photo={require("../assets/no-img-new.png")}
         text="ФОТО МУСОРА"
         onPress={() => navigation.goBack()}

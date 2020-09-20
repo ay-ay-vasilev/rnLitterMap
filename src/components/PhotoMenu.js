@@ -4,6 +4,7 @@ import styles from "../styles/styles";
 import { GradientBlack } from "../components/Gradients";
 
 import BackButton from "../components/BackButton";
+import CustomFAB from "../components/CustomFAB";
 
 export function PhotoMenuNotCleaned(props) {
   return (
@@ -22,7 +23,40 @@ export function PhotoMenuNotCleaned(props) {
         }}
       >
         <Text style={styles.whiteTextBig}>{props.text}</Text>
-        <BackButton />
+        <BackButton onPress={props.onPress} />
+      </View>
+    </View>
+  );
+}
+
+export function PhotoMenuUpload(props) {
+  return (
+    <View style={styles.containerBlack}>
+      <View style={styles.containerTransparent}>
+        <Image
+          source={require("../assets/no-img-uploaded.png")}
+          style={styles.containerBlack}
+        />
+        <GradientBlack />
+      </View>
+      <View style={styles.fabButtonLocationWrapper}>
+        <CustomFAB
+          icon="plus"
+          style={styles.fabButtonBig}
+          onPress={() => goToInitialLocation()}
+        />
+      </View>
+      <View
+        style={{
+          position: "absolute",
+          top: 24,
+          width: "100%",
+          height: 50,
+          justifyContent: "center",
+        }}
+      >
+        <Text style={styles.whiteTextBig}>{props.text}</Text>
+        <BackButton onPress={props.onPress} />
       </View>
     </View>
   );

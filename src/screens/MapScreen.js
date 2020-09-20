@@ -22,14 +22,18 @@ export default function MapScreen({ navigation }) {
   const { colors } = useTheme();
 
   useEffect(() => {
+    let mounted = true;
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("У приложения нет доступа к местоположению устройства.");
+      if (mounted) {
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("У приложения нет доступа к местоположению устройства.");
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
       }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
     })();
+    return () => (mounted = false);
   });
 
   function goToInitialLocation() {

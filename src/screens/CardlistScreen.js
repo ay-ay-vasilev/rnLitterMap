@@ -16,14 +16,18 @@ export default function CardlistScreen({ navigation }) {
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("У приложения нет доступа к местоположению устройства.");
+      if (mounted) {
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("У приложения нет доступа к местоположению устройства.");
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
       }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
     })();
+    return () => (mounted = false);
   });
 
   let cardListScreen = <Loading />;
