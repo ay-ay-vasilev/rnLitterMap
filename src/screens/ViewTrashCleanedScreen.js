@@ -9,7 +9,7 @@ import UserCard from "../components/UserCard";
 import { GradientHighlightGreen } from "../components/Gradients";
 import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 
-import { fakeUser } from "../test/testData";
+// import { fakeUser } from "../test/testData";
 
 export default function ViewTrashNotCleanedScreen({ route, navigation }) {
   const { data } = route.params;
@@ -40,7 +40,7 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
 
         <View style={{ width: "100%", flex: 1 }}>
           <InfoList data={data} />
-          <UserCard user={fakeUser} />
+          {/* <UserCard user={fakeUser} /> */}
         </View>
       </View>
     </View>

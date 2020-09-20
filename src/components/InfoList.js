@@ -10,7 +10,7 @@ export default function InfoList(props) {
   const { colors } = useTheme();
 
   return (
-    <View style={{ flex: 1, width: "100%" }}>
+    <View style={{ width: "100%" }}>
       <View
         style={{
           alignItems: "center",
@@ -24,7 +24,6 @@ export default function InfoList(props) {
 
       <View
         style={{
-          flex: 1,
           width: "100%",
           borderBottomColor: colors.LIGHT_GREY,
           borderBottomWidth: 1,
@@ -32,7 +31,6 @@ export default function InfoList(props) {
       >
         <View
           style={{
-            flex: 1,
             flexDirection: "column",
             marginLeft: 20,
             marginRight: 20,

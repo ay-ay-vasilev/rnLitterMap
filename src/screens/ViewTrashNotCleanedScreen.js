@@ -9,7 +9,7 @@ import UserCard from "../components/UserCard";
 import { GradientHighlightRed } from "../components/Gradients";
 import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 
-import { fakeUser } from "../test/testData";
+// import { fakeUser } from "../test/testData";
 
 export default function ViewTrashNotCleanedScreen({ route, navigation }) {
   const { data } = route.params;
@@ -35,12 +35,13 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
             text="Убрать"
             buttonStyle={styles.raisedButtonBig}
             textStyle={styles.whiteTextMedium}
+            onPress={() => navigation.navigate("CleanTrashCard")}
           />
         </View>
 
-        <View style={{ width: "100%", flex: 1 }}>
+        <View style={{ width: "100%" }}>
           <InfoList data={data} />
-          <UserCard user={fakeUser} />
+          {/* <UserCard user={fakeUser} /> */}
         </View>
       </View>
     </View>

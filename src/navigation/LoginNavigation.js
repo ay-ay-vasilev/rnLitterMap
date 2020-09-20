@@ -9,6 +9,7 @@ import LoginScreen from "../screens/LoginScreen";
 import ViewTrashNotCleanedScreen from "../screens/ViewTrashNotCleanedScreen";
 import ViewTrashCleanedScreen from "../screens/ViewTrashCleanedScreen";
 import AddTrashCardScreen from "../screens/AddTrashCardScreen";
+import CleanTrashCardScreen from "../screens/CleanTrashCardScreen";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ export default function LoginNavigation() {
           component={ViewTrashCleanedScreen}
         />
         <Stack.Screen name="AddTrashCard" component={AddTrashCardScreen} />
+        <Stack.Screen name="CleanTrashCard" component={CleanTrashCardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

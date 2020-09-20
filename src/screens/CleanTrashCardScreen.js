@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
+import { Switch, useTheme } from "react-native-paper";
 
 import styles from "../styles/styles";
 // Custom components
 import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
-import RadioList from "../components/RadioList";
 
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 
-export default function AddTrashCardScreen({ navigation }) {
+export default function CleanTrashCardScreen({ navigation }) {
   const [location, setLocation] = useState(null);
   const [image, setImage] = useState(null);
-  const [checked, setChecked] = useState(0);
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+  const { colors } = useTheme();
 
   useEffect(() => {
     let mounted = true;
@@ -96,7 +97,7 @@ export default function AddTrashCardScreen({ navigation }) {
     <View style={{ flex: 1 }}>
       <PhotoMenuUpload
         image={image}
-        text="ФОТО МУСОРА"
+        text="ФОТО ПОСЛЕ УБОРКИ"
         onPress={() => navigation.goBack()}
         pickImg={() => pickImg()}
       />
@@ -108,18 +109,37 @@ export default function AddTrashCardScreen({ navigation }) {
           alignItems: "center",
         }}
       >
-        <View style={styles.centeredCommonWrapper}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-            Размер мусора
-          </Text>
-        </View>
-
-        <View style={styles.radioListWrapper}>
-          <RadioList
-            checked={checked}
-            setChecked={setChecked}
-            options={["Один пакет", "Несколько пакетов", "Грузовая машина"]}
-          />
+        <View style={styles.commonWrapper}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <View
+              style={{
+                position: "absolute",
+                width: "100%",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 20,
+                  fontWeight: "bold",
+                }}
+              >
+                Убрано мной
+              </Text>
+            </View>
+            <Switch
+              color={colors.PRIMARY_SOLID}
+              value={isSwitchOn}
+              onValueChange={() => setIsSwitchOn(!isSwitchOn)}
+              style={{ marginLeft: 20 }}
+            />
+          </View>
         </View>
 
         <View style={styles.centeredCommonWrapper}>

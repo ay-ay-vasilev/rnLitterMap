@@ -6,7 +6,7 @@ export default function CategoryText(props) {
   const { colors } = useTheme();
 
   return (
-    <View style={{ flex: 1, flexDirection: "row" }}>
+    <View style={{ flexDirection: "row" }}>
       <View
         style={{
           flex: 2,

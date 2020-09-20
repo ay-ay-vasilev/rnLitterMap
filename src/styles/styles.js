@@ -116,7 +116,7 @@ export default StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
-  whiteTextBig: { color: "white", textAlign: "center", fontSize: 22 },
+  whiteTextBig: { color: "white", textAlign: "center", fontSize: 18 },
   // CARDLISTS
   cardListTitle1Cleaned: {
     color: theme.colors.PRIMARY_SOLID,
