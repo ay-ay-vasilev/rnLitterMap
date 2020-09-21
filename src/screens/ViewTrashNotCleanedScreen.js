@@ -35,7 +35,11 @@ export default function ViewTrashNotCleanedScreen({ route, navigation }) {
             text="Убрать"
             buttonStyle={styles.raisedButtonBig}
             textStyle={styles.whiteTextMedium}
-            onPress={() => navigation.navigate("CleanTrashCard")}
+            onPress={() =>
+              navigation.navigate("CleanTrashCard", {
+                location: route.location,
+              })
+            }
           />
         </View>
 

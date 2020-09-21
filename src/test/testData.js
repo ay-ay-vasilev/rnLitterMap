@@ -1,28 +1,28 @@
 export const fakeData = [
   {
     cleaned: true,
-    location: { latitude: 37.4219859, longitude: -122.183984 },
+    location: { U: 37.4219859, k: -122.183984 },
     size: "small",
     date: "2020-09-17",
     img: require("../assets/organic_trash.jpg"),
   },
   {
     cleaned: false,
-    location: { latitude: 37.4299859, longitude: -122.083984 },
+    location: { U: 37.4299859, k: -122.083984 },
     size: "medium",
     date: "2020-09-11",
     img: require("../assets/trash_2.jpg"),
   },
   {
     cleaned: true,
-    location: { latitude: 30.4219859, longitude: -102.083984 },
+    location: { U: 62.0329859, k: 129.820984 },
     size: "small",
     date: "2019-05-19",
     img: require("../assets/trash_3.jpg"),
   },
   {
-    cleaned: true,
-    location: { latitude: 57.4219859, longitude: -110.083984 },
+    cleaned: false,
+    location: { U: 62.0329859, k: 129.750684 },
     size: "big",
     date: "2020-08-19",
     img: require("../assets/trash_4.jpg"),

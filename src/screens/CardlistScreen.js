@@ -10,15 +10,25 @@ import RaisedButton from "../components/RaisedButton";
 import ListItem from "../components/ListItem";
 
 import { fakeData } from "../test/testData";
+import { getLitterItems } from "../firebase/LitterCollectionAPI";
 
 export default function CardlistScreen({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [data, setData] = useState(null);
+
+  onLitterReceived = (litterList) => {
+    setData(litterList);
+  };
 
   useEffect(() => {
     let mounted = true;
+
     (async () => {
       if (mounted) {
+        // TEST HERE
+        getLitterItems(onLitterReceived);
+        // ^
         let { status } = await Location.requestPermissionsAsync();
         if (status !== "granted") {
           setErrorMsg("У приложения нет доступа к местоположению устройства.");
@@ -28,7 +38,7 @@ export default function CardlistScreen({ navigation }) {
       }
     })();
     return () => (mounted = false);
-  });
+  }, []);
 
   let cardListScreen = <Loading />;
   if (errorMsg) {
@@ -45,25 +55,36 @@ export default function CardlistScreen({ navigation }) {
       </View>
     );
   } else if (location) {
-    let dumpCards = fakeData.map((element, index) => (
-      <ListItem
-        key={index}
-        element={element}
-        distance={getDistance(location.coords, element.location)}
-        onPress={() =>
-          navigation.navigate(
-            element.cleaned ? "ViewTrashCleaned" : "ViewTrashNotCleaned",
-            { data: element }
-          )
-        }
-      />
-    ));
+    let dumpCards = <Loading />;
+    if (data) {
+      dumpCards = data.map((element, index) => {
+        return (
+          <ListItem
+            key={index}
+            element={element}
+            distance={getDistance(location.coords, {
+              latitude: element.location.U,
+              longitude: element.location.k,
+            })}
+            onPress={() =>
+              navigation.navigate(
+                element.cleaned ? "ViewTrashCleaned" : "ViewTrashNotCleaned",
+                { data: element, location: location }
+              )
+            }
+          />
+        );
+      });
+    }
+
     cardListScreen = (
       <View style={{ flex: 1 }}>
         <ScrollView>{dumpCards}</ScrollView>
         <View style={styles.buttonBottomRaisedWrapper}>
           <RaisedButton
-            onPress={() => navigation.navigate("AddTrashCard")}
+            onPress={() =>
+              navigation.navigate("AddTrashCard", { location: location })
+            }
             text="Добавить"
             buttonStyle={styles.raisedButton}
             textStyle={styles.whiteTextSmall}

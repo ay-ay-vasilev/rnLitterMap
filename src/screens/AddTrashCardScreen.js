@@ -11,24 +11,14 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 
-export default function AddTrashCardScreen({ navigation }) {
+export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [image, setImage] = useState(null);
   const [checked, setChecked] = useState(0);
 
   useEffect(() => {
     let mounted = true;
-    (async () => {
-      getPermission();
-      if (mounted) {
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("У приложения нет доступа к местоположению устройства.");
-        }
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-      }
-    })();
+    setLocation(route.params.location);
     return () => (mounted = false);
   });
 

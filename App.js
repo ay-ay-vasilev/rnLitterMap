@@ -7,6 +7,8 @@ import LoginNavigation from "./src/navigation/LoginNavigation";
 import theme from "./src/styles/theme.style";
 import moment from "moment";
 import "moment/locale/ru";
+import { YellowBox } from "react-native";
+YellowBox.ignoreWarnings(["Setting a timer"]);
 
 export default function App() {
   moment.locale("ru");

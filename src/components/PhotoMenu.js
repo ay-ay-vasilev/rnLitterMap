@@ -10,7 +10,7 @@ export function PhotoMenuNotCleaned(props) {
   return (
     <View style={styles.containerBlack}>
       <View style={styles.containerTransparent}>
-        <Image source={props.photo} style={styles.containerBlack} />
+        <Image source={{ uri: props.photo }} style={styles.containerBlack} />
         <GradientBlack />
       </View>
       <View

@@ -11,7 +11,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 
-export default function CleanTrashCardScreen({ navigation }) {
+export default function CleanTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [image, setImage] = useState(null);
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
@@ -19,17 +19,7 @@ export default function CleanTrashCardScreen({ navigation }) {
 
   useEffect(() => {
     let mounted = true;
-    (async () => {
-      getPermission();
-      if (mounted) {
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("У приложения нет доступа к местоположению устройства.");
-        }
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-      }
-    })();
+    setLocation(route.params.location);
     return () => (mounted = false);
   });
 

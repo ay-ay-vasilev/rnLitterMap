@@ -39,7 +39,10 @@ export default function ListItem(props) {
       description={formatDateRelative(props.element.date)}
       onPress={props.onPress}
       left={() => (
-        <Image source={props.element.img} style={{ width: 85, height: 85 }} />
+        <Image
+          source={{ uri: props.element.img }}
+          style={{ width: 85, height: 85 }}
+        />
       )}
     />
   );
