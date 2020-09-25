@@ -5,7 +5,6 @@ import styles from "../styles/styles";
 // Custom components
 import RaisedButton from "../components/RaisedButton";
 import InfoList from "../components/InfoList";
-import UserCard from "../components/UserCard";
 import { GradientHighlightRed } from "../components/Gradients";
 import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 

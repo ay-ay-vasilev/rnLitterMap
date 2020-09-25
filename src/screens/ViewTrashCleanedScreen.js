@@ -11,9 +11,11 @@ import { PhotoMenuNotCleaned } from "../components/PhotoMenu";
 
 // import { fakeUser } from "../test/testData";
 
-export default function ViewTrashNotCleanedScreen({ route, navigation }) {
+export default function ViewTrashCleanedScreen({ route, navigation }) {
   const { data } = route.params;
   const { colors } = useTheme();
+
+  console.log(data.locatino);
 
   return (
     <View style={{ flex: 1 }}>

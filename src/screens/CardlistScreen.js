@@ -69,7 +69,7 @@ export default function CardlistScreen({ navigation }) {
             onPress={() =>
               navigation.navigate(
                 element.cleaned ? "ViewTrashCleaned" : "ViewTrashNotCleaned",
-                { data: element, location: location }
+                { data: element }
               )
             }
           />

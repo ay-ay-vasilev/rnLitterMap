@@ -16,7 +16,13 @@ import { translateSize } from "../utils/utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function MapScreen({ navigation }) {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0.09,
+    longitudeDelta: 0.02,
+    loaded: false,
+  });
   const [errorMsg, setErrorMsg] = useState(null);
 
   const { colors } = useTheme();
@@ -30,7 +36,7 @@ export default function MapScreen({ navigation }) {
           setErrorMsg("У приложения нет доступа к местоположению устройства.");
         }
         let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
+        setLocation(location, { loaded: true });
       }
     })();
     return () => (mounted = false);
@@ -52,7 +58,7 @@ export default function MapScreen({ navigation }) {
         <Text>{errorMsg}</Text>
       </View>
     );
-  } else if (location) {
+  } else if (location.loaded) {
     mapScreen = (
       <View style={styles.containerWhite}>
         <MapView
