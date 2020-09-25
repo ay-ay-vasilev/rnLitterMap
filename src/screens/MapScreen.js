@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useTheme } from "react-native-paper";
 
@@ -30,17 +30,25 @@ export default function MapScreen({ navigation }) {
     let mounted = true;
     (async () => {
       if (mounted) {
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location, { loaded: true });
+        let loc = await Location.getCurrentPositionAsync({});
+        setLocation({
+          latitude: loc.coords.latitude,
+          longitude: loc.coords.longitude,
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.02,
+          loaded: true,
+        });
       }
     })();
+
+    console.log(location);
     return () => (mounted = false);
   });
 
   function goToInitialLocation() {
     this.map.animateToRegion({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude,
       latitudeDelta: 0.05,
       longitudeDelta: 0.05,
     });
@@ -55,8 +63,8 @@ export default function MapScreen({ navigation }) {
             this.map = map;
           }}
           initialRegion={{
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
+            latitude: location.latitude,
+            longitude: location.longitude,
             latitudeDelta: 0.5,
             longitudeDelta: 0.5,
           }}

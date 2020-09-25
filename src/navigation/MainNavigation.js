@@ -8,6 +8,10 @@ import { useTheme } from "react-native-paper";
 import MapScreen from "../screens/MapScreen";
 import CardlistScreen from "../screens/CardlistScreen";
 import AccountScreen from "../screens/AccountScreen";
+import ViewTrashNotCleanedScreen from "../screens/ViewTrashNotCleanedScreen";
+import ViewTrashCleanedScreen from "../screens/ViewTrashCleanedScreen";
+import AddTrashCardScreen from "../screens/AddTrashCardScreen";
+import CleanTrashCardScreen from "../screens/CleanTrashCardScreen";
 
 import { GradientSelected } from "../utils/utils";
 
@@ -24,6 +28,34 @@ function CardlistStackScreen() {
           title: "Свалки",
           headerLeft: null,
           headerTitleStyle: { alignSelf: "center" },
+        }}
+      />
+      <CardlistStack.Screen
+        name="ViewTrashNotCleaned"
+        component={ViewTrashNotCleanedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <CardlistStack.Screen
+        name="ViewTrashCleaned"
+        component={ViewTrashCleanedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <CardlistStack.Screen
+        name="AddTrashCard"
+        component={AddTrashCardScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <CardlistStack.Screen
+        name="CleanTrashCard"
+        component={CleanTrashCardScreen}
+        options={{
+          headerShown: false,
         }}
       />
     </CardlistStack.Navigator>

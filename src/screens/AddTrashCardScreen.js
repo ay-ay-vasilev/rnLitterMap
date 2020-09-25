@@ -47,8 +47,8 @@ export default function AddTrashCardScreen({ route, navigation }) {
     console.log({
       cleaned: false,
       location: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+        U: location.coords.latitude,
+        k: location.coords.longitude,
       },
       size: size,
       date: date,
