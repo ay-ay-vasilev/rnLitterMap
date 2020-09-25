@@ -38,7 +38,16 @@ export async function getLitterItems(itemsRetrieved) {
     .get();
 
   snapshot.forEach((doc) => {
-    litterList.push(doc.data());
+    litterList.push({
+      cleaned: doc.data().cleaned,
+      location: {
+        latitude: doc.data().location.U,
+        longitude: doc.data().location.k,
+      },
+      size: doc.data().size,
+      date: doc.data().date,
+      img: doc.data().img,
+    });
   });
 
   itemsRetrieved(litterList);

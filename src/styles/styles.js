@@ -22,9 +22,14 @@ export default StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
+  // IMAGES
   loginLogo: {
     width: 170,
     height: 170,
+  },
+  loginLogoSmall: {
+    width: 140,
+    height: 140,
   },
   // BUTTONS
   buttonGradient: {
@@ -134,10 +139,5 @@ export default StyleSheet.create({
   },
   cardListTitle3: {
     color: "black",
-  },
-  // OTHER
-  lottie: {
-    width: 500,
-    height: 500,
   },
 });

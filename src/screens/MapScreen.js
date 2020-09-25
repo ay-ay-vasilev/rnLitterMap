@@ -23,7 +23,6 @@ export default function MapScreen({ navigation }) {
     longitudeDelta: 0.02,
     loaded: false,
   });
-  const [errorMsg, setErrorMsg] = useState(null);
 
   const { colors } = useTheme();
 
@@ -31,10 +30,6 @@ export default function MapScreen({ navigation }) {
     let mounted = true;
     (async () => {
       if (mounted) {
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("У приложения нет доступа к местоположению устройства.");
-        }
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location, { loaded: true });
       }
@@ -52,13 +47,7 @@ export default function MapScreen({ navigation }) {
   }
 
   let mapScreen = <Loading />;
-  if (errorMsg) {
-    mapScreen = (
-      <View style={styles.containerWhite}>
-        <Text>{errorMsg}</Text>
-      </View>
-    );
-  } else if (location.loaded) {
+  if (location.loaded) {
     mapScreen = (
       <View style={styles.containerWhite}>
         <MapView

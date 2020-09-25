@@ -10,7 +10,7 @@ import "moment/locale/ru";
 import { YellowBox } from "react-native";
 YellowBox.ignoreWarnings(["Setting a timer"]);
 
-export default function App() {
+export default App = () => {
   moment.locale("ru");
 
   return (
@@ -19,4 +19,4 @@ export default function App() {
       <LoginNavigation />
     </PaperProvider>
   );
-}
+};

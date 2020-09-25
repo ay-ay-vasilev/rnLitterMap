@@ -9,12 +9,10 @@ import styles from "../styles/styles";
 import RaisedButton from "../components/RaisedButton";
 import ListItem from "../components/ListItem";
 
-import { fakeData } from "../test/testData";
 import { getLitterItems } from "../firebase/LitterCollectionAPI";
 
-export default function CardlistScreen({ navigation }) {
+export default CardlistScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
   const [data, setData] = useState(null);
 
   onLitterReceived = (litterList) => {
@@ -29,10 +27,6 @@ export default function CardlistScreen({ navigation }) {
         // TEST HERE
         getLitterItems(onLitterReceived);
         // ^
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("У приложения нет доступа к местоположению устройства.");
-        }
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
       }
@@ -41,31 +35,15 @@ export default function CardlistScreen({ navigation }) {
   }, []);
 
   let cardListScreen = <Loading />;
-  if (errorMsg) {
-    cardListScreen = (
-      <View
-        style={{
-          flex: 1,
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Text>{errorMsg}</Text>
-      </View>
-    );
-  } else if (location) {
-    let dumpCards = <Loading />;
+  if (location) {
+    let dumpCards = <View />;
     if (data) {
       dumpCards = data.map((element, index) => {
         return (
           <ListItem
             key={index}
             element={element}
-            distance={getDistance(location.coords, {
-              latitude: element.location.U,
-              longitude: element.location.k,
-            })}
+            distance={getDistance(location.coords, element.location)}
             onPress={() =>
               navigation.navigate(
                 element.cleaned ? "ViewTrashCleaned" : "ViewTrashNotCleaned",
@@ -95,4 +73,4 @@ export default function CardlistScreen({ navigation }) {
   }
 
   return <View style={{ flex: 1 }}>{cardListScreen}</View>;
-}
+};

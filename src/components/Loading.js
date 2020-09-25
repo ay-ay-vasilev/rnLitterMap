@@ -7,8 +7,8 @@ export default function Loading() {
   const { colors } = useTheme();
 
   return (
-    <View styles={styles.containerWhite}>
-      <Text>Loading</Text>
+    <View style={styles.containerWhite}>
+      <Text style={{ fontSize: 18 }}>Загрузка...</Text>
     </View>
   );
 }
