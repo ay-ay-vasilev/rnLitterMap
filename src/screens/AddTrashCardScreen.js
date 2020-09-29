@@ -9,7 +9,8 @@ import RadioList from "../components/RadioList";
 
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
+
+import { uploadLitterItem } from "../firebase/LitterCollectionAPI";
 
 export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
@@ -44,7 +45,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
         break;
     }
 
-    console.log({
+    let litterItem = {
       cleaned: false,
       location: {
         U: location.coords.latitude,
@@ -53,31 +54,42 @@ export default function AddTrashCardScreen({ route, navigation }) {
       size: size,
       date: date,
       img: { uri: image },
-    });
+    };
+
+    uploadLitterItem(litterItem);
+
+    // console.log({
+    //   cleaned: false,
+    //   location: {
+    //     U: location.coords.latitude,
+    //     k: location.coords.longitude,
+    //   },
+    //   size: size,
+    //   date: date,
+    //   img: { uri: image },
+    // });
   }
 
   async function pickImg() {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        setImage(result.uri);
-      }
-    } catch (E) {
-      console.log(E);
-    }
-  }
-
-  async function getPermission() {
     if (Platform.OS !== "web") {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
         alert(
           "Для выбора файла, приложению требуется разрешение на использование камеры."
         );
+      } else {
+        try {
+          let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          if (!result.cancelled) {
+            setImage(result.uri);
+          }
+        } catch (E) {
+          console.log(E);
+        }
       }
     }
   }

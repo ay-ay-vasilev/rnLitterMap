@@ -1,6 +1,8 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
 
+import moment from "moment";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAp6ROCZraGPQXM0QT8ISzgJr5YBonHG60",
   authDomain: "littermap-884f1.firebaseapp.com",
@@ -12,21 +14,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
-export function addLitterItem(item, addComplete) {
-  firebase
-    .firestore()
-    .collection("litterCollection")
-    .add({
-      cleared: item.cleared,
-      location: item.location,
-      size: item.size,
-      date: item.date,
-      img: item.img,
-    })
-    .then((data) => addComplete(data))
-    .catch((error) => console.log(error));
-}
 
 export async function getLitterItems(itemsRetrieved) {
   var litterList = [];
@@ -51,4 +38,63 @@ export async function getLitterItems(itemsRetrieved) {
   });
 
   itemsRetrieved(litterList);
+}
+
+export function uploadLitterItem(item) {
+  if (item.img) {
+    const fileExtension = item.img.uri.split(".").pop();
+    const id = moment(new Date()).format("YYYY-MM-DD-hh-mm-ss");
+    const fileName = `${id}.${fileExtension}`;
+
+    var storageRef = firebase.storage().ref(`litter/images/${fileName}`);
+
+    (async () => {
+      const response = await fetch(item.img.uri);
+      const blob = await response.blob();
+
+      var metadata = {
+        contentType: `image/${fileExtension}`,
+      };
+
+      storageRef.put(blob, metadata).on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+          console.log("snapshot: " + snapshot.state);
+          console.log(
+            "progress: " +
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+
+          if (snapshot.state === firebase.storage.TaskState.SUCCESS) {
+            console.log("Success");
+          }
+        },
+        (error) => {
+          console.log("image upload error: " + error.code);
+        },
+        () => {
+          storageRef.getDownloadURL().then((downloadUrl) => {
+            console.log("File available at: " + downloadUrl);
+
+            addLitterItem(item);
+          });
+        }
+      );
+    })();
+  }
+}
+
+export function addLitterItem(item, addComplete) {
+  firebase
+    .firestore()
+    .collection("litterCollection")
+    .add({
+      cleared: item.cleared,
+      location: item.location,
+      size: item.size,
+      date: item.date,
+      img: item.img,
+    })
+    .then((data) => addComplete(data))
+    .catch((error) => console.log(error));
 }
