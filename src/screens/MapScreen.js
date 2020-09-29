@@ -30,7 +30,7 @@ export default function MapScreen({ navigation }) {
     let mounted = true;
     (async () => {
       if (mounted) {
-        let loc = await Location.getCurrentPositionAsync({});
+        let loc = await Location.getLastKnownPositionAsync({});
         setLocation({
           latitude: loc.coords.latitude,
           longitude: loc.coords.longitude,
@@ -41,7 +41,6 @@ export default function MapScreen({ navigation }) {
       }
     })();
 
-    console.log(location);
     return () => (mounted = false);
   });
 

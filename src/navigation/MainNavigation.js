@@ -8,8 +8,10 @@ import { useTheme } from "react-native-paper";
 import MapScreen from "../screens/MapScreen";
 import CardlistScreen from "../screens/CardlistScreen";
 import AccountScreen from "../screens/AccountScreen";
-import ViewTrashNotCleanedScreen from "../screens/ViewTrashNotCleanedScreen";
-import ViewTrashCleanedScreen from "../screens/ViewTrashCleanedScreen";
+import {
+  ViewTrashNotCleanedScreen,
+  ViewTrashCleanedScreen,
+} from "../screens/ViewTrashScreen";
 import AddTrashCardScreen from "../screens/AddTrashCardScreen";
 import CleanTrashCardScreen from "../screens/CleanTrashCardScreen";
 
@@ -101,13 +103,13 @@ export default function MainNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Dumplist"
+      initialRouteName="Cardlist"
       activeColor={colors.PRIMARY_SOLID}
       labelStyle={{ fontSize: 12 }}
       barStyle={{ backgroundColor: "white" }}
     >
       <Tab.Screen
-        name="Dumplist"
+        name="Cardlist"
         component={CardlistStackScreen}
         options={{
           tabBarLabel: "Свалки",
