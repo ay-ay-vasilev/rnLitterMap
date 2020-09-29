@@ -11,6 +11,8 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
 import { uploadLitterItem } from "../firebase/LitterCollectionAPI";
+// REMOVE LATER
+import moment from "moment";
 
 export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
@@ -25,12 +27,9 @@ export default function AddTrashCardScreen({ route, navigation }) {
 
   function uploadButton() {
     const today = new Date();
-    const date =
-      today.getFullYear() +
-      "-" +
-      parseInt(today.getMonth() + 1) +
-      "-" +
-      today.getDate();
+
+    const date = moment(today).format("YYYY-MM-DD");
+    console.log(date);
 
     let size;
     switch (checked) {
@@ -48,8 +47,8 @@ export default function AddTrashCardScreen({ route, navigation }) {
     let litterItem = {
       cleaned: false,
       location: {
-        U: location.coords.latitude,
-        k: location.coords.longitude,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
       },
       size: size,
       date: date,

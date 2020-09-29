@@ -28,8 +28,8 @@ export async function getLitterItems(itemsRetrieved) {
     litterList.push({
       cleaned: doc.data().cleaned,
       location: {
-        latitude: doc.data().location.U,
-        longitude: doc.data().location.k,
+        latitude: doc.data().location.latitude,
+        longitude: doc.data().location.longitude,
       },
       size: doc.data().size,
       date: doc.data().date,
@@ -51,7 +51,6 @@ export function uploadLitterItem(item) {
     (async () => {
       const response = await fetch(item.img.uri);
       const blob = await response.blob();
-
       var metadata = {
         contentType: `image/${fileExtension}`,
       };
@@ -65,7 +64,7 @@ export function uploadLitterItem(item) {
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
 
-          if (snapshot.state === firebase.storage.TaskState.SUCCESS) {
+          if (snapshot.state === firebase.storage.TaskEvent.SUCCESS) {
             console.log("Success");
           }
         },
@@ -76,7 +75,7 @@ export function uploadLitterItem(item) {
           storageRef.getDownloadURL().then((downloadUrl) => {
             console.log("File available at: " + downloadUrl);
 
-            addLitterItem(item);
+            addLitterItem({ ...item, img: downloadUrl });
           });
         }
       );
@@ -84,17 +83,17 @@ export function uploadLitterItem(item) {
   }
 }
 
-export function addLitterItem(item, addComplete) {
+export function addLitterItem(item) {
   firebase
     .firestore()
     .collection("litterCollection")
     .add({
-      cleared: item.cleared,
+      cleaned: item.cleaned,
       location: item.location,
       size: item.size,
       date: item.date,
       img: item.img,
     })
-    .then((data) => addComplete(data))
+    .then((data) => console.log("addLitterData: ", data))
     .catch((error) => console.log(error));
 }
