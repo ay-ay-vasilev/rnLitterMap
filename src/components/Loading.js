@@ -2,7 +2,15 @@ import React from "react";
 import { View, Text } from "react-native";
 import styles from "../styles/styles";
 
-export default function Loading() {
+export function Loading() {
+  return (
+    <View style={styles.containerWhite}>
+      <Text style={{ fontSize: 18 }}>Загрузка...</Text>
+    </View>
+  );
+}
+
+export function LoadingTransparent() {
   return (
     <View
       style={{

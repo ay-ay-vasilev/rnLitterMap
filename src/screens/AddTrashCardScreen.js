@@ -6,7 +6,7 @@ import styles from "../styles/styles";
 import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
 import RadioList from "../components/RadioList";
-import Loading from "../components/Loading";
+import { LoadingTransparent } from "../components/Loading";
 
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -98,7 +98,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
         justifyContent: "center",
       }}
     >
-      <Loading />
+      <LoadingTransparent />
     </View>
   ) : (
     <View />

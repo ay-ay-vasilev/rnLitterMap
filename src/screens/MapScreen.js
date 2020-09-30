@@ -5,7 +5,7 @@ import { useTheme } from "react-native-paper";
 
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
-import Loading from "../components/Loading";
+import { Loading } from "../components/Loading";
 
 import * as Location from "expo-location";
 

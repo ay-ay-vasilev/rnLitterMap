@@ -4,7 +4,7 @@ import * as Location from "expo-location";
 import { getDistance } from "geolib";
 import { useIsFocused } from "@react-navigation/native";
 
-import Loading from "../components/Loading";
+import { Loading } from "../components/Loading";
 
 import styles from "../styles/styles";
 import RaisedButton from "../components/RaisedButton";

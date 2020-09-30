@@ -32,7 +32,7 @@ export async function getLitterItems(itemsRetrieved) {
         longitude: doc.data().location.longitude,
       },
       size: doc.data().size,
-      date: doc.data().date.toDate().toDateString(),
+      date: doc.data().date.toDate().toISOString(),
       img: doc.data().img,
     });
   });
