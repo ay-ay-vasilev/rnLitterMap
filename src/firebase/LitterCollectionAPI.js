@@ -40,7 +40,7 @@ export async function getLitterItems(itemsRetrieved) {
   itemsRetrieved(litterList);
 }
 
-export function uploadLitterItem(item) {
+export function uploadLitterItem(item, onUploadFinish) {
   if (item.img) {
     const fileExtension = item.img.uri.split(".").pop();
     const id = moment(new Date()).format("YYYY-MM-DD-hh-mm-ss");
@@ -58,12 +58,6 @@ export function uploadLitterItem(item) {
       storageRef.put(blob, metadata).on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) => {
-          console.log("snapshot: " + snapshot.state);
-          console.log(
-            "progress: " +
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-
           if (snapshot.state === firebase.storage.TaskEvent.SUCCESS) {
             console.log("Success");
           }
@@ -73,9 +67,7 @@ export function uploadLitterItem(item) {
         },
         () => {
           storageRef.getDownloadURL().then((downloadUrl) => {
-            console.log("File available at: " + downloadUrl);
-
-            addLitterItem({ ...item, img: downloadUrl });
+            addLitterItem({ ...item, img: downloadUrl }, onUploadFinish);
           });
         }
       );
@@ -83,7 +75,7 @@ export function uploadLitterItem(item) {
   }
 }
 
-export function addLitterItem(item) {
+export function addLitterItem(item, onAddFinish) {
   firebase
     .firestore()
     .collection("litterCollection")
@@ -94,6 +86,6 @@ export function addLitterItem(item) {
       date: item.date,
       img: item.img,
     })
-    .then((data) => console.log("addLitterData: ", data))
+    .then(onAddFinish())
     .catch((error) => console.log(error));
 }

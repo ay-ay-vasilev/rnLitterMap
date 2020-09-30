@@ -15,22 +15,21 @@ export default CardlistScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
 
+  const updateState = async () => {
+    getLitterItems(onLitterReceived);
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  };
+
   onLitterReceived = (litterList) => {
     setData(litterList);
   };
 
   useEffect(() => {
     let mounted = true;
-
-    (async () => {
-      if (mounted) {
-        // TEST HERE
-        getLitterItems(onLitterReceived);
-        // ^
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-      }
-    })();
+    if (mounted) {
+      updateState();
+    }
     return () => (mounted = false);
   }, []);
 
@@ -61,7 +60,10 @@ export default CardlistScreen = ({ navigation }) => {
         <View style={styles.buttonBottomRaisedWrapper}>
           <RaisedButton
             onPress={() =>
-              navigation.navigate("AddTrashCard", { location: location })
+              navigation.navigate("AddTrashCard", {
+                location: location,
+                updateState: updateState,
+              })
             }
             text="Добавить"
             buttonStyle={styles.raisedButton}

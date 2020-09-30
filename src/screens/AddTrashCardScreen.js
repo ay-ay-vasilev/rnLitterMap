@@ -6,6 +6,7 @@ import styles from "../styles/styles";
 import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
 import RadioList from "../components/RadioList";
+import Loading from "../components/Loading";
 
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -18,6 +19,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [image, setImage] = useState(null);
   const [checked, setChecked] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -25,7 +27,13 @@ export default function AddTrashCardScreen({ route, navigation }) {
     return () => (mounted = false);
   });
 
-  function uploadButton() {
+  const uploadFinish = () => {
+    setLoading(false);
+    route.params.updateState();
+    navigation.popToTop();
+  };
+
+  const uploadButton = () => {
     const today = new Date();
 
     const date = moment(today).format("YYYY-MM-DD");
@@ -55,21 +63,11 @@ export default function AddTrashCardScreen({ route, navigation }) {
       img: { uri: image },
     };
 
-    uploadLitterItem(litterItem);
+    setLoading(true);
+    uploadLitterItem(litterItem, uploadFinish);
+  };
 
-    // console.log({
-    //   cleaned: false,
-    //   location: {
-    //     U: location.coords.latitude,
-    //     k: location.coords.longitude,
-    //   },
-    //   size: size,
-    //   date: date,
-    //   img: { uri: image },
-    // });
-  }
-
-  async function pickImg() {
+  const pickImg = async () => {
     if (Platform.OS !== "web") {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
@@ -91,7 +89,23 @@ export default function AddTrashCardScreen({ route, navigation }) {
         }
       }
     }
-  }
+  };
+
+  let loadingView = loading ? (
+    <View
+      style={{
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Loading />
+    </View>
+  ) : (
+    <View />
+  );
 
   return (
     <View style={{ flex: 1 }}>
@@ -132,6 +146,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
           />
         </View>
       </View>
+      {loadingView}
     </View>
   );
 }
