@@ -21,7 +21,7 @@ export async function getLitterItems(itemsRetrieved) {
   var snapshot = await firebase
     .firestore()
     .collection("litterCollection")
-    .orderBy("date")
+    .orderBy("date", "desc")
     .get();
 
   snapshot.forEach((doc) => {
@@ -32,7 +32,7 @@ export async function getLitterItems(itemsRetrieved) {
         longitude: doc.data().location.longitude,
       },
       size: doc.data().size,
-      date: doc.data().date,
+      date: doc.data().date.toDate().toDateString(),
       img: doc.data().img,
     });
   });
@@ -83,7 +83,7 @@ export function addLitterItem(item, onAddFinish) {
       cleaned: item.cleaned,
       location: item.location,
       size: item.size,
-      date: item.date,
+      date: firebase.firestore.Timestamp.now(),
       img: item.img,
     })
     .then(onAddFinish())

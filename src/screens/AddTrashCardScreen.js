@@ -34,9 +34,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
 
   const uploadButton = () => {
     const today = new Date();
-
     const date = moment(today).format("YYYY-MM-DD");
-    console.log(date);
 
     let size;
     switch (checked) {

@@ -68,9 +68,9 @@ export function formatDistance(distance) {
 }
 
 export function formatDateRelative(date) {
-  return moment(date).fromNow();
+  return moment(new Date(date)).fromNow();
 }
 
 export function formatDate(date) {
-  return moment(date).format("ll");
+  return moment(new Date(date)).format("ll");
 }

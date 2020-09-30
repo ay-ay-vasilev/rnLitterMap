@@ -11,6 +11,7 @@ import RaisedButton from "../components/RaisedButton";
 import ListItem from "../components/ListItem";
 
 import { getLitterItems } from "../firebase/LitterCollectionAPI";
+import { formatDateRelative } from "../utils/utils";
 
 export default CardlistScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
@@ -30,7 +31,6 @@ export default CardlistScreen = ({ navigation }) => {
   useEffect(() => {
     let mounted = true;
     if (mounted && isFocused) {
-      console.log("UPDATING THE LIST");
       updateState();
     }
     return () => (mounted = false);
