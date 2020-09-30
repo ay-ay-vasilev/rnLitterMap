@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useTheme } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
@@ -10,51 +11,57 @@ import { Loading } from "../components/Loading";
 import * as Location from "expo-location";
 
 import styles from "../styles/styles";
-import { fakeData } from "../test/testData";
 
 import { translateSize } from "../utils/utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { getLitterItems } from "../firebase/LitterCollectionAPI";
+
 export default function MapScreen({ navigation }) {
   const [location, setLocation] = useState({
-    latitude: 0,
-    longitude: 0,
+    coords: { latitude: 0, longitude: 0 },
     latitudeDelta: 0.09,
     longitudeDelta: 0.02,
     loaded: false,
   });
-
+  const [data, setData] = useState(null);
+  const isFocused = useIsFocused();
   const { colors } = useTheme();
+
+  const updateState = async () => {
+    getLitterItems(onLitterReceived);
+    let loc = await Location.getLastKnownPositionAsync({});
+    setLocation({
+      coords: loc.coords,
+      latitudeDelta: 0.09,
+      longitudeDelta: 0.02,
+      loaded: true,
+    });
+  };
+
+  onLitterReceived = (litterList) => {
+    setData(litterList);
+  };
 
   useEffect(() => {
     let mounted = true;
-    (async () => {
-      if (mounted) {
-        let loc = await Location.getLastKnownPositionAsync({});
-        setLocation({
-          latitude: loc.coords.latitude,
-          longitude: loc.coords.longitude,
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.02,
-          loaded: true,
-        });
-      }
-    })();
-
+    if (mounted && isFocused) {
+      updateState();
+    }
     return () => (mounted = false);
-  });
+  }, [isFocused]);
 
   function goToInitialLocation() {
     this.map.animateToRegion({
-      latitude: location.latitude,
-      longitude: location.longitude,
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
       latitudeDelta: 0.05,
       longitudeDelta: 0.05,
     });
   }
 
   let mapScreen = <Loading />;
-  if (location.loaded) {
+  if (location.loaded && data) {
     mapScreen = (
       <View style={styles.containerWhite}>
         <MapView
@@ -62,8 +69,8 @@ export default function MapScreen({ navigation }) {
             this.map = map;
           }}
           initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
             latitudeDelta: 0.5,
             longitudeDelta: 0.5,
           }}
@@ -75,7 +82,7 @@ export default function MapScreen({ navigation }) {
           showsTraffic={false}
           showsIndoors={false}
         >
-          {fakeData.map((marker, index) => (
+          {data.map((marker, index) => (
             <Marker
               key={index}
               coordinate={marker.location}

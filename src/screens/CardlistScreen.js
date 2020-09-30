@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView } from "react-native";
 import * as Location from "expo-location";
 import { getDistance } from "geolib";
 import { useIsFocused } from "@react-navigation/native";
@@ -11,7 +11,6 @@ import RaisedButton from "../components/RaisedButton";
 import ListItem from "../components/ListItem";
 
 import { getLitterItems } from "../firebase/LitterCollectionAPI";
-import { formatDateRelative } from "../utils/utils";
 
 export default CardlistScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
