@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, ScrollView, Text } from "react-native";
 import * as Location from "expo-location";
 import { getDistance } from "geolib";
+import { useIsFocused } from "@react-navigation/native";
 
 import Loading from "../components/Loading";
 
@@ -14,6 +15,7 @@ import { getLitterItems } from "../firebase/LitterCollectionAPI";
 export default CardlistScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
+  const isFocused = useIsFocused();
 
   const updateState = async () => {
     getLitterItems(onLitterReceived);
@@ -27,11 +29,12 @@ export default CardlistScreen = ({ navigation }) => {
 
   useEffect(() => {
     let mounted = true;
-    if (mounted) {
+    if (mounted && isFocused) {
+      console.log("UPDATING THE LIST");
       updateState();
     }
     return () => (mounted = false);
-  }, []);
+  }, [isFocused]);
 
   let cardListScreen = <Loading />;
   if (location) {
@@ -62,7 +65,6 @@ export default CardlistScreen = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("AddTrashCard", {
                 location: location,
-                updateState: updateState,
               })
             }
             text="Добавить"

@@ -29,7 +29,6 @@ export default function AddTrashCardScreen({ route, navigation }) {
 
   const uploadFinish = () => {
     setLoading(false);
-    route.params.updateState();
     navigation.popToTop();
   };
 
