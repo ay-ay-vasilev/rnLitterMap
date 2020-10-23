@@ -40,7 +40,11 @@ export default function ListItem(props) {
       onPress={props.onPress}
       left={() => (
         <Image
-          source={{ uri: props.element.litterPhotos }}
+          source={{
+            uri: props.element.cleaned
+              ? props.element.cleanedPhotos
+              : props.element.litterPhotos,
+          }}
           style={{ width: 85, height: 85 }}
         />
       )}

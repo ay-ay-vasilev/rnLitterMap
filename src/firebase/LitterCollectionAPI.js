@@ -34,6 +34,7 @@ export async function getLitterItems(itemsRetrieved) {
       size: doc.data().size,
       date: doc.data().date.toDate().toISOString(),
       litterPhotos: doc.data().litterPhotos,
+      cleanedPhotos: doc.data().cleaned ? doc.data().cleanedPhotos : undefined,
     });
   });
 
