@@ -44,7 +44,11 @@ export function PhotoMenuUpload(props) {
         <GradientBlack />
       </View>
       <View style={styles.fabButtonCameraWrapper}>
-        <CustomFAB icon="camera" style={styles.fabButtonBig} />
+        <CustomFAB
+          icon="camera"
+          style={styles.fabButtonBig}
+          onPress={props.cameraImg}
+        />
       </View>
       <View style={styles.fabButtonLocationWrapper}>
         <CustomFAB

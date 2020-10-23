@@ -13,6 +13,23 @@ import RaisedButton from "../components/RaisedButton";
 import RadioList from "../components/RadioList";
 import { LoadingTransparent } from "../components/Loading";
 
+export async function askAsyncMultiple(array) {
+  array = array instanceof Array ? array : arguments;
+  const result = [];
+  for (let i in array) {
+    let ask;
+    try {
+      ask = await Permissions.askAsync(array[i]);
+    } catch (e) {
+      ask = { status: "error", error: e };
+    }
+    ask.type = array[i];
+    result.push(ask);
+  }
+  return result;
+}
+Permissions.askAsyncMultiple = askAsyncMultiple;
+
 export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [image, setImage] = useState(null);
@@ -56,6 +73,36 @@ export default function AddTrashCardScreen({ route, navigation }) {
 
     setLoading(true);
     uploadLitterItem(litterItem, uploadFinish);
+  };
+
+  const cameraImg = async () => {
+    if (Platform.OS !== "web") {
+      let status;
+      status = await Permissions.getAsync(Permissions.CAMERA);
+      let statusCamera = status.status;
+
+      status = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+      let statusCameraRoll = status.status;
+
+      if (statusCamera !== "granted" || statusCameraRoll !== "granted") {
+        alert(
+          "Для выбора файла, приложению требуется разрешение на использование камеры."
+        );
+      } else {
+        try {
+          let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          if (!result.cancelled) {
+            setImage(result.uri);
+          }
+        } catch (E) {
+          console.log(E);
+        }
+      }
+    }
   };
 
   const pickImg = async () => {
@@ -105,6 +152,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
         text="ФОТО МУСОРА"
         onPress={() => navigation.goBack()}
         pickImg={() => pickImg()}
+        cameraImg={() => cameraImg()}
       />
 
       <View
