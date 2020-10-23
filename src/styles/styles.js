@@ -112,6 +112,13 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  fabButtonCameraWrapper: {
+    position: "absolute",
+    top: "60%",
+    left: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   // TEXT
   whiteTextSmall: {
     color: "white",
