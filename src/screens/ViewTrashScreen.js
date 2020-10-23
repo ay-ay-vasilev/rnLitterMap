@@ -17,7 +17,7 @@ export function ViewTrashCleanedScreen({ route, navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <PhotoMenuNotCleaned
-        photo={data.img}
+        photo={data.litterPhotos}
         text="УБРАНО"
         onPress={() => navigation.goBack()}
       />
@@ -52,7 +52,7 @@ export function ViewTrashNotCleanedScreen({ route, navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <PhotoMenuNotCleaned
-        photo={data.img}
+        photo={data.litterPhotos}
         text="НЕ УБРАНО"
         onPress={() => navigation.goBack()}
       />

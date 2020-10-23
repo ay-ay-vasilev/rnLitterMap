@@ -33,7 +33,7 @@ export async function getLitterItems(itemsRetrieved) {
       },
       size: doc.data().size,
       date: doc.data().date.toDate().toISOString(),
-      img: doc.data().img,
+      litterPhotos: doc.data().litterPhotos,
     });
   });
 
@@ -41,15 +41,15 @@ export async function getLitterItems(itemsRetrieved) {
 }
 
 export function uploadLitterItem(item, onUploadFinish) {
-  if (item.img) {
-    const fileExtension = item.img.uri.split(".").pop();
+  if (item.litterPhotos) {
+    const fileExtension = item.litterPhotos.uri.split(".").pop();
     const id = moment(new Date()).format("YYYY-MM-DD-hh-mm-ss");
     const fileName = `${id}.${fileExtension}`;
 
-    var storageRef = firebase.storage().ref(`litter/images/${fileName}`);
+    var storageRef = firebase.storage().ref(`images/litter/${fileName}`);
 
     (async () => {
-      const response = await fetch(item.img.uri);
+      const response = await fetch(item.litterPhotos.uri);
       const blob = await response.blob();
       var metadata = {
         contentType: `image/${fileExtension}`,
@@ -67,7 +67,10 @@ export function uploadLitterItem(item, onUploadFinish) {
         },
         () => {
           storageRef.getDownloadURL().then((downloadUrl) => {
-            addLitterItem({ ...item, img: downloadUrl }, onUploadFinish);
+            addLitterItem(
+              { ...item, litterPhotos: downloadUrl },
+              onUploadFinish
+            );
           });
         }
       );
@@ -84,7 +87,7 @@ export function addLitterItem(item, onAddFinish) {
       location: item.location,
       size: item.size,
       date: firebase.firestore.Timestamp.now(),
-      img: item.img,
+      litterPhotos: item.litterPhotos,
     })
     .then(onAddFinish())
     .catch((error) => console.log(error));

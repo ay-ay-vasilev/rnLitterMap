@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
+// Expo
+import * as Location from "expo-location";
+// Map
 import MapView, { Marker } from "react-native-maps";
-import { useTheme } from "react-native-paper";
+// Navigation
 import { useIsFocused } from "@react-navigation/native";
-
+// API
+import { getLitterItems } from "../firebase/LitterCollectionAPI";
+// React Paper
+import { useTheme } from "react-native-paper";
+// Styling
+import styles from "../styles/styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+// Custom stuff
 import RaisedButton from "../components/RaisedButton";
 import CustomFAB from "../components/CustomFAB";
 import { Loading } from "../components/Loading";
-
-import * as Location from "expo-location";
-
-import styles from "../styles/styles";
-
+// util
 import { translateSize } from "../utils/utils";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-import { getLitterItems } from "../firebase/LitterCollectionAPI";
 
 export default function MapScreen({ navigation }) {
   const [location, setLocation] = useState({
@@ -55,8 +58,8 @@ export default function MapScreen({ navigation }) {
     this.map.animateToRegion({
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
-      latitudeDelta: 0.05,
-      longitudeDelta: 0.05,
+      latitudeDelta: 0.5,
+      longitudeDelta: 0.5,
     });
   }
 

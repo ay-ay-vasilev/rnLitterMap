@@ -14,7 +14,7 @@ import {
 } from "../screens/ViewTrashScreen";
 import AddTrashCardScreen from "../screens/AddTrashCardScreen";
 import CleanTrashCardScreen from "../screens/CleanTrashCardScreen";
-
+// util
 import { GradientSelected } from "../utils/utils";
 
 const Tab = createMaterialBottomTabNavigator();

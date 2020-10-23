@@ -53,7 +53,7 @@ export default function CleanTrashCardScreen({ route, navigation }) {
       },
       size: size,
       date: date,
-      img: { uri: image },
+      litterPhotos: { uri: image },
     });
   }
 

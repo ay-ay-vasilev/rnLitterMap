@@ -1,8 +1,10 @@
 import React from "react";
 import { View } from "react-native";
+// Styling
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-community/masked-view";
+
 import moment from "moment";
 
 export function GradientSelected(focused, iconName, colors) {

@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
-
+// Expo
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
+// API
+import { uploadLitterItem } from "../firebase/LitterCollectionAPI";
+// Styling
 import styles from "../styles/styles";
 // Custom components
 import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
 import RadioList from "../components/RadioList";
 import { LoadingTransparent } from "../components/Loading";
-
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
-
-import { uploadLitterItem } from "../firebase/LitterCollectionAPI";
-// REMOVE LATER
-import moment from "moment";
 
 export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
@@ -33,9 +31,6 @@ export default function AddTrashCardScreen({ route, navigation }) {
   };
 
   const uploadButton = () => {
-    const today = new Date();
-    const date = moment(today).format("YYYY-MM-DD");
-
     let size;
     switch (checked) {
       case 0:
@@ -56,8 +51,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
         longitude: location.coords.longitude,
       },
       size: size,
-      date: date,
-      img: { uri: image },
+      litterPhotos: { uri: image },
     };
 
     setLoading(true);
