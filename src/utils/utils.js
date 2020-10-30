@@ -7,7 +7,7 @@ import MaskedView from "@react-native-community/masked-view";
 
 import moment from "moment";
 
-export function GradientSelected(focused, iconName, colors) {
+export const GradientSelected = (focused, iconName, colors) => {
   return focused ? (
     <MaskedView
       style={{ flex: 1, flexDirection: "row" }}
@@ -39,9 +39,9 @@ export function GradientSelected(focused, iconName, colors) {
       size={26}
     />
   );
-}
+};
 
-export function translateSize(value) {
+export const translateSize = (value) => {
   switch (value) {
     case "small":
       return "Хватит одного пакета";
@@ -55,9 +55,9 @@ export function translateSize(value) {
     default:
       return "Неизвестно";
   }
-}
+};
 
-export function formatDistance(distance) {
+export const formatDistance = (distance) => {
   if (distance < 100) {
     return "< 100 метров";
   } else if (distance < 1000) {
@@ -67,12 +67,12 @@ export function formatDistance(distance) {
   } else {
     return `в ${Number(distance / 1000).toFixed(0)} км`;
   }
-}
+};
 
-export function formatDateRelative(date) {
+export const formatDateRelative = (date) => {
   return moment(new Date(date)).fromNow();
-}
+};
 
-export function formatDate(date) {
+export const formatDate = (date) => {
   return moment(new Date(date)).format("ll");
-}
+};

@@ -1,87 +1,104 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Switch, useTheme } from "react-native-paper";
-
+// Expo
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
+// styling
 import styles from "../styles/styles";
 // Custom components
 import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
 
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
-
-export default function CleanTrashCardScreen({ route, navigation }) {
-  const [location, setLocation] = useState(null);
+export default function CleanTrashCardScreen({ navigation }) {
   const [image, setImage] = useState(null);
-  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { colors } = useTheme();
 
-  useEffect(() => {
-    let mounted = true;
-    setLocation(route.params.location);
-    return () => (mounted = false);
-  });
+  const uploadFinish = () => {
+    setLoading(false);
+    navigation.popToTop();
+  };
 
-  function uploadButton() {
-    const today = new Date();
-    const date =
-      today.getFullYear() +
-      "-" +
-      parseInt(today.getMonth() + 1) +
-      "-" +
-      today.getDate();
+  const uploadButton = () => {
+    let litterItem = {
+      cleaned: true,
+      cleanedPhotos: { uri: image },
+    };
 
-    let size;
-    switch (checked) {
-      case 0:
-        size = "small";
-        break;
-      case 1:
-        size = "medium";
-        break;
-      case 2:
-        size = "big";
-        break;
-    }
+    console.log(litterItem);
+  };
 
-    console.log({
-      cleaned: false,
-      location: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      },
-      size: size,
-      date: date,
-      litterPhotos: { uri: image },
-    });
-  }
+  const cameraImg = async () => {
+    if (Platform.OS !== "web") {
+      let status;
+      status = await Permissions.getAsync(Permissions.CAMERA);
+      let statusCamera = status.status;
 
-  async function pickImg() {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        setImage(result.uri);
+      status = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+      let statusCameraRoll = status.status;
+
+      if (statusCamera !== "granted" || statusCameraRoll !== "granted") {
+        alert(
+          "Для выбора файла, приложению требуется разрешение на использование камеры."
+        );
+      } else {
+        try {
+          let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          if (!result.cancelled) {
+            setImage(result.uri);
+          }
+        } catch (E) {
+          console.log(E);
+        }
       }
-    } catch (E) {
-      console.log(E);
     }
-  }
+  };
 
-  async function getPermission() {
+  const pickImg = async () => {
     if (Platform.OS !== "web") {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
         alert(
           "Для выбора файла, приложению требуется разрешение на использование камеры."
         );
+      } else {
+        try {
+          let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          if (!result.cancelled) {
+            setImage(result.uri);
+          }
+        } catch (E) {
+          console.log(E);
+        }
       }
     }
-  }
+  };
+
+  let loadingView = loading ? (
+    <View
+      style={{
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <LoadingTransparent />
+    </View>
+  ) : (
+    <View />
+  );
 
   return (
     <View style={{ flex: 1 }}>
@@ -90,6 +107,7 @@ export default function CleanTrashCardScreen({ route, navigation }) {
         text="ФОТО ПОСЛЕ УБОРКИ"
         onPress={() => navigation.goBack()}
         pickImg={() => pickImg()}
+        cameraImg={() => cameraImg()}
       />
 
       <View
@@ -141,6 +159,7 @@ export default function CleanTrashCardScreen({ route, navigation }) {
           />
         </View>
       </View>
+      {loadingView}
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 // Expo
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -12,23 +12,6 @@ import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
 import RadioList from "../components/RadioList";
 import { LoadingTransparent } from "../components/Loading";
-
-export async function askAsyncMultiple(array) {
-  array = array instanceof Array ? array : arguments;
-  const result = [];
-  for (let i in array) {
-    let ask;
-    try {
-      ask = await Permissions.askAsync(array[i]);
-    } catch (e) {
-      ask = { status: "error", error: e };
-    }
-    ask.type = array[i];
-    result.push(ask);
-  }
-  return result;
-}
-Permissions.askAsyncMultiple = askAsyncMultiple;
 
 export default function AddTrashCardScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
@@ -73,6 +56,13 @@ export default function AddTrashCardScreen({ route, navigation }) {
 
     setLoading(true);
     uploadLitterItem(litterItem, uploadFinish);
+  };
+
+  const noPhotoMessage = () => {
+    Alert.alert(
+      "Ошибка",
+      "Для добавления отметки мусора фотография обязательна!"
+    );
   };
 
   const cameraImg = async () => {
@@ -178,7 +168,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
 
         <View style={styles.centeredCommonWrapper}>
           <RaisedButton
-            onPress={() => uploadButton()}
+            onPress={() => (image ? uploadButton() : noPhotoMessage())}
             text="Готово"
             buttonStyle={styles.raisedButtonBig}
             textStyle={styles.whiteTextMedium}
