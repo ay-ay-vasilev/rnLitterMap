@@ -80,15 +80,20 @@ export function uploadLitterItem(item, onUploadFinish) {
 }
 
 export function addLitterItem(item, onAddFinish) {
+  let uploadItem = {
+    cleaned: item.cleaned,
+    location: item.location,
+    size: item.size,
+    date: firebase.firestore.Timestamp.now(),
+    litterPhotos: item.litterPhotos,
+  };
+
   firebase
     .firestore()
     .collection("litterCollection")
-    .add({
-      cleaned: item.cleaned,
-      location: item.location,
-      size: item.size,
-      date: firebase.firestore.Timestamp.now(),
-      litterPhotos: item.litterPhotos,
+    .add(uploadItem)
+    .then((snapshot) => {
+      (uploadItem.id = snapshot.id), snapshot.set(uploadItem);
     })
     .then(onAddFinish())
     .catch((error) => console.log(error));
