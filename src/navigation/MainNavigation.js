@@ -7,7 +7,7 @@ import { useTheme } from "react-native-paper";
 // Screens
 import MapScreen from "../screens/MapScreen";
 import CardlistScreen from "../screens/CardlistScreen";
-import AccountScreen from "../screens/AccountScreen";
+// import AccountScreen from "../screens/AccountScreen";
 import {
   ViewTrashNotCleanedScreen,
   ViewTrashCleanedScreen,
@@ -81,22 +81,22 @@ function MapStackScreen() {
   );
 }
 
-const AccountStack = createStackNavigator();
-function AccountStackScreen() {
-  return (
-    <AccountStack.Navigator>
-      <AccountStack.Screen
-        name="Account"
-        component={AccountScreen}
-        options={{
-          title: "Профиль",
-          headerLeft: null,
-          headerTitleStyle: { alignSelf: "center" },
-        }}
-      />
-    </AccountStack.Navigator>
-  );
-}
+// const AccountStack = createStackNavigator();
+// function AccountStackScreen() {
+//   return (
+//     <AccountStack.Navigator>
+//       <AccountStack.Screen
+//         name="Account"
+//         component={AccountScreen}
+//         options={{
+//           title: "Профиль",
+//           headerLeft: null,
+//           headerTitleStyle: { alignSelf: "center" },
+//         }}
+//       />
+//     </AccountStack.Navigator>
+//   );
+// }
 
 export default function MainNavigation() {
   const { colors } = useTheme();
@@ -125,7 +125,7 @@ export default function MainNavigation() {
           tabBarIcon: ({ focused }) => GradientSelected(focused, "web", colors),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Account"
         component={AccountStackScreen}
         options={{
@@ -133,7 +133,7 @@ export default function MainNavigation() {
           tabBarIcon: ({ focused }) =>
             GradientSelected(focused, "account-circle", colors),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
