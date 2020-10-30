@@ -55,7 +55,7 @@ export default function AddTrashCardScreen({ route, navigation }) {
     };
 
     setLoading(true);
-    uploadLitterItem(litterItem, uploadFinish);
+    uploadLitterItem(litterItem, uploadFinish, { updating: false });
   };
 
   const noPhotoMessage = () => {

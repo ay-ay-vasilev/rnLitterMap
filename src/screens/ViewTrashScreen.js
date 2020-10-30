@@ -14,6 +14,8 @@ export function ViewTrashCleanedScreen({ route, navigation }) {
   const { data } = route.params;
   const { colors } = useTheme();
 
+  console.log(data);
+
   return (
     <View style={{ flex: 1 }}>
       <PhotoMenuNotCleaned
@@ -49,6 +51,8 @@ export function ViewTrashCleanedScreen({ route, navigation }) {
 export function ViewTrashNotCleanedScreen({ route, navigation }) {
   const { data } = route.params;
 
+  console.log(data);
+
   return (
     <View style={{ flex: 1 }}>
       <PhotoMenuNotCleaned
@@ -72,7 +76,7 @@ export function ViewTrashNotCleanedScreen({ route, navigation }) {
             textStyle={styles.whiteTextMedium}
             onPress={() =>
               navigation.navigate("CleanTrashCard", {
-                location: route.location,
+                id: data.id,
               })
             }
           />

@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { Switch, useTheme } from "react-native-paper";
 // Expo
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
-// styling
+// API
+import { uploadLitterItem } from "../firebase/LitterCollectionAPI";
+// Styling
 import styles from "../styles/styles";
 // Custom components
 import { PhotoMenuUpload } from "../components/PhotoMenu";
 import RaisedButton from "../components/RaisedButton";
+import { LoadingTransparent } from "../components/Loading";
 
-export default function CleanTrashCardScreen({ navigation }) {
+export default function CleanTrashCardScreen({ route, navigation }) {
   const [image, setImage] = useState(null);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const [loading, setLoading] = useState(false);
   const { colors } = useTheme();
+
+  console.log(route.params.id);
+
+  useEffect(() => {
+    let mounted = true;
+    return () => (mounted = false);
+  });
 
   const uploadFinish = () => {
     setLoading(false);
@@ -23,11 +33,21 @@ export default function CleanTrashCardScreen({ navigation }) {
 
   const uploadButton = () => {
     let litterItem = {
+      id: route.params.id,
       cleaned: true,
       cleanedPhotos: { uri: image },
     };
 
-    console.log(litterItem);
+    setLoading(true);
+    console.log("HEY");
+    uploadLitterItem(litterItem, uploadFinish, { updating: true });
+  };
+
+  const noPhotoMessage = () => {
+    Alert.alert(
+      "Ошибка",
+      "Для подтверждения уборки мусора фотография обязательна!"
+    );
   };
 
   const cameraImg = async () => {
@@ -152,7 +172,7 @@ export default function CleanTrashCardScreen({ navigation }) {
 
         <View style={styles.centeredCommonWrapper}>
           <RaisedButton
-            onPress={() => uploadButton()}
+            onPress={() => (image ? uploadButton() : noPhotoMessage())}
             text="Готово"
             buttonStyle={styles.raisedButtonBig}
             textStyle={styles.whiteTextMedium}

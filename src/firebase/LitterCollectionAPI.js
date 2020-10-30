@@ -26,6 +26,7 @@ export async function getLitterItems(itemsRetrieved) {
 
   snapshot.forEach((doc) => {
     litterList.push({
+      id: doc.data().id,
       cleaned: doc.data().cleaned,
       location: {
         latitude: doc.data().location.latitude,
@@ -41,46 +42,57 @@ export async function getLitterItems(itemsRetrieved) {
   itemsRetrieved(litterList);
 }
 
-export function uploadLitterItem(item, onUploadFinish) {
-  if (item.litterPhotos) {
-    const fileExtension = item.litterPhotos.uri.split(".").pop();
-    const id = moment(new Date()).format("YYYY-MM-DD-hh-mm-ss");
-    const fileName = `${id}.${fileExtension}`;
+export function uploadLitterItem(item, onUploadFinish, { updating }) {
+  let photo;
+  let path;
 
-    var storageRef = firebase.storage().ref(`images/litter/${fileName}`);
+  updating
+    ? ((photo = item.cleanedPhotos), (path = "images/cleaned/"))
+    : ((photo = item.litterPhotos), (path = "images/litter"));
 
-    (async () => {
-      const response = await fetch(item.litterPhotos.uri);
-      const blob = await response.blob();
-      var metadata = {
-        contentType: `image/${fileExtension}`,
-      };
+  const fileExtension = photo.uri.split(".").pop();
+  const id = moment(new Date()).format("YYYY-MM-DD-hh-mm-ss");
+  const fileName = `${id}.${fileExtension}`;
 
-      storageRef.put(blob, metadata).on(
-        firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) => {
-          if (snapshot.state === firebase.storage.TaskEvent.SUCCESS) {
-            console.log("Success");
-          }
-        },
-        (error) => {
-          console.log("image upload error: " + error.code);
-        },
-        () => {
-          storageRef.getDownloadURL().then((downloadUrl) => {
-            addLitterItem(
-              { ...item, litterPhotos: downloadUrl },
-              onUploadFinish
-            );
-          });
+  let storageRef;
+  storageRef = firebase.storage().ref(path + `${fileName}`);
+
+  (async () => {
+    const response = await fetch(photo.uri);
+    const blob = await response.blob();
+    var metadata = {
+      contentType: `image/${fileExtension}`,
+    };
+
+    storageRef.put(blob, metadata).on(
+      firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        if (snapshot.state === firebase.storage.TaskEvent.SUCCESS) {
+          console.log("Success");
         }
-      );
-    })();
-  }
+      },
+      (error) => {
+        console.log("image upload error: " + error.code);
+      },
+      () => {
+        storageRef.getDownloadURL().then((downloadUrl) => {
+          updating
+            ? updateLitterItem(
+                { ...item, cleanedPhotos: downloadUrl },
+                onUploadFinish
+              )
+            : addLitterItem(
+                { ...item, litterPhotos: downloadUrl },
+                onUploadFinish
+              );
+        });
+      }
+    );
+  })();
 }
 
 export function addLitterItem(item, onAddFinish) {
-  let uploadItem = {
+  const addItem = {
     cleaned: item.cleaned,
     location: item.location,
     size: item.size,
@@ -91,10 +103,29 @@ export function addLitterItem(item, onAddFinish) {
   firebase
     .firestore()
     .collection("litterCollection")
-    .add(uploadItem)
+    .add(addItem)
     .then((snapshot) => {
-      (uploadItem.id = snapshot.id), snapshot.set(uploadItem);
+      (addItem.id = snapshot.id), snapshot.set(addItem);
     })
     .then(onAddFinish())
+    .catch((error) => console.log(error));
+}
+
+export function updateLitterItem(item, onUploadFinish) {
+  const updateItem = {
+    id: item.id,
+    cleaned: item.cleaned,
+    cleanedDate: firebase.firestore.Timestamp.now(),
+    cleanedPhotos: item.cleanedPhotos,
+  };
+
+  console.log(updateItem);
+
+  firebase
+    .firestore()
+    .collection("litterCollection")
+    .doc(updateItem.id)
+    .set(updateItem, { merge: true })
+    .then(onUploadFinish())
     .catch((error) => console.log(error));
 }
